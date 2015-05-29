@@ -1,0 +1,9 @@
+<ion-view view-title="Double Lets Eat">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="voucher in vouchers" href="#/app/vouchers/{{voucher.id}}">
+        {{voucher.title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,1 +1,9 @@
-/* Empty. Add your own CSS if you like */
+.email.ng-valid{
+	color:green;
+}
+.email.ng-dirty.ng-invalid-required{
+	color:red;
+}
+.email.ng-dirty.ng-invalid-minlenght{
+	color:#6C6;
+}
