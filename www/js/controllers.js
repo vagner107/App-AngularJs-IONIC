@@ -30,11 +30,12 @@ angular.module('starter.controllers', [])
 	if ($scope.loginData.username == 'admin' && $scope.loginData.password == 'admin')  
     <!---->console.log('Doing login', $scope.loginData);
 	
-	
 	$timeout(function() {
-		
+		/*var result = { referer:'jimbob', param2:37, etc:'bluebell' };
+		$state.go('app.vouchers', result);	*/
+		$state.go('app.vouchers', { 'index': 123, 'anotherKey': 'This is a test' });
       $scope.closeLogin();
-	  $state.go('app.vouchers');
+	  
     }, 1500);
 
 	
@@ -46,6 +47,13 @@ angular.module('starter.controllers', [])
     }, 1000);*/
 	
   };
+  
+  
+$scope.logout = function() {
+	$state.go('welcome');
+};
+  
+  
 })
 
 
@@ -53,9 +61,13 @@ angular.module('starter.controllers', [])
 * Controller : vouchersCtrl
 *
 */
-.controller('vouchersCtrl', function($scope) {
+.controller('vouchersCtrl', function($scope, $stateParams) {
+
+	var index = $stateParams[0];
+    var anotherKey = $stateParams[1];
+
   $scope.vouchers = [
-    { title: 'Ativo', id: 1 },
+    { title: 'Ativo', id: 1, cod: 345 },
     { title: 'N Ativo', id: 2 },
   ];
 })
@@ -66,4 +78,5 @@ angular.module('starter.controllers', [])
 *
 */
 .controller('voucherCtrl', function($scope, $stateParams) {
+   
 });

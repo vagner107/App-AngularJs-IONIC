@@ -7,3 +7,27 @@
 .email.ng-dirty.ng-invalid-minlenght{
 	color:#6C6;
 }
+.wc_backgroud {
+  background: url(../img/lets1.png);
+  /* background-repeat: no-repeat; */
+  background-size: cover;
+  /* background-position: center; */
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  /* z-index: 2; */
+  /* position: relative; */
+}
+
+.logo {
+  width: 30%;
+  height: 30%;
+  margin: 0px;
+}
+
+.wc_container {
+  width: 70%;
+  height: 43%;
+  margin: auto;
+  z-index: 2;
+}
