@@ -1,0 +1,26 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Cadastro</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeCadastro()">Fechar</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="doCadastro()" name="cadastroDataForm">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Usuario</span>
+          <input class="email" name="email" type="text" ng-model="cadastroData.username" ng-minlenght="4" required>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Senha</span>
+          <input class="email" type="password" ng-model="cadastroData.password" ng-minlenght="4" required>
+        </label>
+        <label class="item">
+          <button ng-disabled="cadastroDataForm.$invalid" class="button button-block button-positive" type="submit">Cadastrar</button>
+        </label>
+        <!--<span ng-show="loginForm.email.$error.required"> Campo Obrigatorio</span>-->
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

@@ -1,31 +1,31 @@
-angular.module('starter.controllers', [])
+angular.module('starter.welcomeController', [])
 /*
 * Controller : AppCtrl
 *
 */
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state) {
-  // Form data for the login modal
+.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state) {
+
+//********************************************* LOGIN  ***********************************************// 
   $scope.loginData = {};
 
-  // Create the login modal that we will use later
+  // Cria modal 
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;
   });
 
-  // Triggered in the login modal to close it
+  // fechar modal 
   $scope.closeLogin = function() {
     $scope.modal.hide();
   };
 
-  // Open the login modal
+  // abrir modal
   $scope.login = function() {
     $scope.modal.show();
   };
 
-  // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
 	if ($scope.loginData.username == 'admin' && $scope.loginData.password == 'admin')  
     <!---->console.log('Doing login', $scope.loginData);
@@ -53,26 +53,28 @@ $scope.logout = function() {
 	$state.go('welcome');
 };
   
+  
+//********************************************* CADASTRO  ***********************************************// 
   $scope.cadastroData = {};
 
-  // Create the login modal that we will use later
+
   $ionicModal.fromTemplateUrl('templates/cadastro.html', {
     scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
+  }).then(function(modal1) {
+    $scope.modal1 = modal1;
   });
 
-  // Triggered in the login modal to close it
+  
   $scope.closeCadastro = function() {
-    $scope.modal.hide();
+    $scope.modal1.hide();
   };
 
-  // Open the login modal
+ 
   $scope.cadastro = function() {
-    $scope.modal.show();
+    $scope.modal1.show();
   };
 
-  // Perform the login action when the user submits the login form
+  
   $scope.doCadastro = function() {
 	if ($scope.cadastroData.username == 'admin' && $scope.cadastroData.password == 'admin')  
     <!---->console.log('Doing login', $scope.loginData);
@@ -81,13 +83,53 @@ $scope.logout = function() {
 		/*var result = { referer:'jimbob', param2:37, etc:'bluebell' };
 		$state.go('app.vouchers', result);	*/
 		$state.go('app.vouchers', { 'index': 123, 'anotherKey': 'This is a test' });
-      $scope.closeLogin();
+      $scope.closeCadastro();
 	  
     }, 1500);
 
 	
 	else{
 		alert("dados incorretos");
+	}
+
+  };
+  
+//********************************************* RECUPERAR SENHA  ***********************************************//
+
+ $scope.senhaData = {};
+
+  // Cria modal 
+  $ionicModal.fromTemplateUrl('templates/recuperarSenha.html', {
+    scope: $scope
+  }).then(function(modal2) {
+    $scope.modal2 = modal2;
+  });
+
+  // fechar modal 
+  $scope.closeSenha = function() {
+    $scope.modal2.hide();
+  };
+
+  // abrir modal
+  $scope.senhaRecupera = function() {
+    $scope.modal2.show();
+  };
+
+  $scope.doSenha = function() {
+	if ($scope.senhaData.username == 'admin' && $scope.senhaData.password == 'admin')  
+    <!---->console.log('Doing login', $scope.loginData);
+	
+	$timeout(function() {
+		/*var result = { referer:'jimbob', param2:37, etc:'bluebell' };
+		$state.go('app.vouchers', result);	*/
+		$state.go('app.vouchers', { 'index': 123, 'anotherKey': 'This is a test' });
+      $scope.closeSenha();
+	  
+    }, 1500);
+
+	
+	else{
+		alert("email Enviado com sucesso");
 	}
 /*    $timeout(function() {
       $scope.closeLogin();
@@ -98,41 +140,7 @@ $scope.logout = function() {
   
 $scope.logout = function() {
 	$state.go('welcome');
-};  
-})
-
-
-/*
-* Controller : vouchersCtrl
-*
-*/
-.controller('vouchersCtrl', function($scope, $stateParams) {
-
-	var index = $stateParams[0];
-    var anotherKey = $stateParams[1];
-
-  $scope.vouchers = [
-    { title: 'Ativo', id: 1, cod: 345 },
-    { title: 'N Ativo', id: 2 },
-  ];
-})
-
-/*
-* Controller : Cadastro
-*
-*/
-
-.controller('Cadastro', function($scope, $ionicModal, $timeout, $state) {
-  // Cadastro Usuario objeto
-
+};
   
   
 })
-
-/*
-* Controller : voucherCtrl
-*
-*/
-.controller('voucherCtrl', function($scope, $stateParams) {
-   
-});
