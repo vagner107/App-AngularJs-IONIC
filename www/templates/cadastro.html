@@ -10,19 +10,19 @@
       <div class="list">
         <label class="item item-input item-floating-label">
           <span class="input-label">Nome Completo</span>
-          <input class="email" name="email" type="text" ng-model="cadastroData.username" placeholder="Nome Completo" ng-minlenght="4" required>
+          <input class="" name="nome" type="text" ng-model="cadastroData.username" placeholder="Nome Completo" ng-minlenght="10" required>
         </label>
         <label class="item item-input item-floating-label">
           <span class="input-label">Dt Nascimento</span>
-          <input class="date" type="date" ng-model="cadastroData.data" placeholder="Dt Nascimento" ng-minlenght="4" required>
+          <input class="" type="date" ng-model="cadastroData.data" placeholder="Dt Nascimento" ng-minlenght="6" required>
         </label>
          <label class="item item-input item-floating-label">
           <span class="input-label">Email</span>
-          <input class="email" type="email" ng-model="cadastroData.email" placeholder="Email" ng-minlenght="4" required>
+          <input class="email" type="email" ng-model="cadastroData.email" placeholder="Email" ng-minlenght="10" required>
         </label>
         <label class="item item-input item-floating-label">
           <span class="input-label">Senha</span>
-          <input class="email" type="password" ng-model="cadastroData.password" placeholder="Senha" ng-minlenght="4" required>
+          <input class="password" type="password" ng-model="cadastroData.senha" placeholder="Senha" ng-minlenght="6" ng-maxlenght="15" required>
         </label>
         <label class="item">
           <button ng-disabled="cadastroDataForm.$invalid" class="button-block button button-energized" type="submit">Cadastrar</button>
