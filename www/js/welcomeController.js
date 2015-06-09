@@ -1,12 +1,39 @@
-angular.module('starter.welcomeController', [])
+angular.module('starter.welcomeController', ['ionic'])
 /*
 * Controller : AppCtrl
 *
 */
 
-.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state) {
+.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup) {
 
 //********************************************* LOGIN  ***********************************************// 
+
+// LOADING
+	$scope.show = function() {
+		$ionicLoading.show({
+		template: 'Aguarde...',
+		noBackdrop : false,
+		hideOnStateChange : false,
+		duration : '3000'
+	
+		});
+	};
+	// LOADING
+	$scope.hide = function(){
+		$ionicLoading.hide();
+	};
+  //ALERTA LOGIN
+  $scope.showAlert = function() {
+   var alertPopup = $ionicPopup.alert({
+     title: 'Email ou Login incorretos',
+     template: 'Tente Novamente',
+	 delay : '4000'
+   });
+   alertPopup.then(function(res) {
+     console.log('Obrigado por acessar');
+   });
+ };
+   
   $scope.loginData = {};
 
   // Cria modal 
@@ -31,16 +58,19 @@ angular.module('starter.welcomeController', [])
     <!---->console.log('Doing login', $scope.loginData);
 	
 	$timeout(function() {
-		/*var result = { referer:'jimbob', param2:37, etc:'bluebell' };
-		$state.go('app.vouchers', result);	*/
-		$state.go('app.vouchers', { 'index': 123, 'anotherKey': 'This is a test' });
-      $scope.closeLogin();
-	  
-    }, 1500);
+	  $scope.closeLogin();
+	  $scope.show();
+	  $state.go('app.vouchers', { 'index': 123, 'anotherKey': 'This is a test' });
+  	}, 1500);
 
 	
 	else{
-		alert("senha e email incorretos");
+	$scope.show();	
+	
+	$timeout(function() {
+		$scope.showAlert();
+	}, 3000);
+	
 	}
 /*    $timeout(function() {
       $scope.closeLogin();

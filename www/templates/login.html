@@ -14,12 +14,11 @@
         </label>
         <label class="item item-input">
           <span class="input-label">Senha</span>
-          <input class="email" type="password" ng-model="loginData.password" ng-minlenght="4" required>
+          <input class="password" type="password" ng-model="loginData.password" ng-minlenght="4" required>
         </label>
         <label class="item">
-          <button ng-disabled="loginForm.$invalid" class="button button-block button-positive" type="submit">Log in</button>
+          <button ng-disabled="loginForm.$invalid" class="button-block button button-energized" type="submit">Log in</button>
         </label>
-        <!--<span ng-show="loginForm.email.$error.required"> Campo Obrigatorio</span>-->
       </div>
     </form>
   </ion-content>

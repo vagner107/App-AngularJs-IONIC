@@ -8,18 +8,14 @@
   <ion-content>
     <form ng-submit="doSenha()" name="senhaForm">
       <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Usuario</span>
-          <input class="email" name="email" type="text" ng-model="senhaData.username" ng-minlenght="4" required>
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Senha</span>
-          <input class="email" type="password" ng-model="senhaData.password" ng-minlenght="4" required>
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Email</span>
+          <input class="email" type="email" ng-model="senhaData.email" placeholder="Email" ng-minlenght="4" required>
         </label>
         <label class="item">
-          <button ng-disabled="senhaForm.$invalid" class="button button-block button-positive" type="submit">Recuperar</button>
+          <button ng-disabled="senhaForm.$invalid" class="button-block button button-energized" type="submit">Recuperar</button>
         </label>
-        <!--<span ng-show="loginForm.email.$error.required"> Campo Obrigatorio</span>-->
+
       </div>
     </form>
   </ion-content>
