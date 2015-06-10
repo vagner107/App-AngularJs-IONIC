@@ -1,111 +1,21 @@
 angular.module('starter.controllers', ['ionic'])
-/*
+/***********************************************************************************
 * Controller : AppCtrl
-*
-*/
-
+* $ionicModal: Modulo para abilitar modal IONIC
+* $timeout :  Modulo com metodos com temporizadores
+* $state : Modulo utilizado na app para direcionar para paginas
+***********************************************************************************/
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $state) {
-  // Form data for the login modal
-  $scope.loginData = {};
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-	if ($scope.loginData.username == 'admin' && $scope.loginData.password == 'admin')  
-    <!---->console.log('Doing login', $scope.loginData);
-	
-	$timeout(function() {
-		/*var result = { referer:'jimbob', param2:37, etc:'bluebell' };
-		$state.go('app.vouchers', result);	*/
-		$state.go('app.vouchers', { 'index': 123, 'anotherKey': 'This is a test' });
-      $scope.closeLogin();
-	  
-    }, 1500);
-
-	
-	else{
-		alert("senha e email incorretos");
-	}
-/*    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);*/
-	
-  };
   
+	$scope.logout = function() {
+		$state.go('welcome');
+	};
   
-$scope.logout = function() {
-	$state.go('welcome');
-};
-  
-  $scope.cadastroData = {};
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/cadastro.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeCadastro = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.cadastro = function() {
-    $scope.modal.show();
-  };
-
-  // Perform the login action when the user submits the login form
-  $scope.doCadastro = function() {
-	if ($scope.cadastroData.username == 'admin' && $scope.cadastroData.password == 'admin')  
-    <!---->console.log('Doing login', $scope.loginData);
-	
-	$timeout(function() {
-		/*var result = { referer:'jimbob', param2:37, etc:'bluebell' };
-		$state.go('app.vouchers', result);	*/
-		$state.go('app.vouchers', { 'index': 123, 'anotherKey': 'This is a test' });
-      $scope.closeLogin();
-	  
-    }, 1500);
-
-	
-	else{
-		alert("dados incorretos");
-	}
-/*    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);*/
-	
-  };
-  
-  
-$scope.logout = function() {
-	$state.go('welcome');
-};  
 })
-
-
-/*
+/***********************************************************************************
 * Controller : vouchersCtrl
-*
-*/
+* $stateParams: Metodo utilizado para redirecionar parametros pela URL como um php
+***********************************************************************************/
 .controller('vouchersCtrl', function($scope, $stateParams) {
 
 	var index = $stateParams[0];
@@ -116,23 +26,10 @@ $scope.logout = function() {
     { title: 'N Ativo', id: 2 },
   ];
 })
-
-/*
-* Controller : Cadastro
-*
-*/
-
-.controller('Cadastro', function($scope, $ionicModal, $timeout, $state) {
-  // Cadastro Usuario objeto
-
-  
-  
-})
-
-/*
+/***********************************************************************************
 * Controller : voucherCtrl
-*
-*/
+* $stateParams: Metodo utilizado para redirecionar parametros pela URL como um php
+***********************************************************************************/
 .controller('voucherCtrl', function($scope, $stateParams) {
    
 });
