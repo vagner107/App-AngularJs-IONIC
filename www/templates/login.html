@@ -5,14 +5,19 @@
       <button class="button button-clear" ng-click="closeLogin()">Fechar</button>
     </div>
   </ion-header-bar>
+	
   <ion-content>
     <form ng-submit="doLogin()" name="loginForm">
       <div class="list">
-        <label class="item item-input">
+        <label class="item item-input item-stacked-label">
           <span class="input-label">Usuario</span>
           <input class="email" name="email" type="text" ng-model="loginData.username" ng-minlenght="4" required>
         </label>
-        <label class="item item-input">
+     <!--    <label class="item item-input item-stacked-label">
+          <span class="input-label">Usuario</span>
+          <input class="email" name="email" type="email" ng-model="loginData.username" ng-minlenght="4" required>
+        </label>-->
+        <label class="item item-input item-stacked-label">
           <span class="input-label">Senha</span>
           <input class="password" type="password" ng-model="loginData.password" ng-minlenght="4" required>
         </label>

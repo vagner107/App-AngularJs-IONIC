@@ -1,13 +1,14 @@
 angular.module('starter.welcomeController', ['ionic'])
 /*
 * Controller : WelcomeCtrl
-* $ionicModal: Modulo para abilitar modal IONIC, exemplo : Login , Cadastro, Esqueci minha senha
-* $timeout :  Modulo com metodos com temporizadores
-* $state : Modulo utilizado na app para direcionar para paginas
-* $ionicLoading : Modulo loading IONIC
-* $ionicPopup : Modulo Popup IONIC (Alertas e Notificações)
+* $ionicModal: Serviço para abilitar modal IONIC, exemplo : Login , Cadastro, Esqueci minha senha
+* $timeout :  Serviço com metodos com temporizadores
+* $state : Serviço utilizado na app para direcionar para paginas
+* $ionicLoading : Serviço loading IONIC
+* $ionicPopup : Serviço Popup IONIC (Alertas e Notificações)
+* $http > Serviços para estabelecer acesso http.
 */
-.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup) {
+.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup, $http) {
 
 //********************************************* LOGIN  ***********************************************// 
 
@@ -21,11 +22,11 @@ angular.module('starter.welcomeController', ['ionic'])
 	
 		});
 	};
-	// LOADING
+// LOADING
 	$scope.hide = function(){
 		$ionicLoading.hide();
 	};
-  //ALERTA LOGIN
+//ALERTA LOGIN
   $scope.showAlert = function() {
    var alertPopup = $ionicPopup.alert({
      title: 'Email ou Login incorretos',
@@ -43,19 +44,19 @@ angular.module('starter.welcomeController', ['ionic'])
   $scope.loginData = {};
   
 
-  // CRIAR MODAL
+// CRIAR MODAL
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;
   });
 
-  // FHECHAR MODAL
+// FHECHAR MODAL
   $scope.closeLogin = function() {
     $scope.modal.hide();
   };
 
-  // ABRIR MODAL
+// ABRIR MODAL
   $scope.login = function() {
     $scope.modal.show();
   };
@@ -78,12 +79,14 @@ angular.module('starter.welcomeController', ['ionic'])
 	}, 3000);
 	
 	}
-/*    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);*/
 	
+
   };
-    
+
+/*$scope.login=function(data){
+		loginService.login(data,$scope); //call login service
+};*/
+	    
 $scope.logout = function() {
 	$state.go('welcome');
 };

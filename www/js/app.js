@@ -1,9 +1,9 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
+/*
+* Modulo Criado : starter;
+* include module: ionic
+*include module : starter.controllers
+* include module : starter.welcomeController
+*/
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.welcomeController'])
 
 .run(function($ionicPlatform) {
@@ -76,6 +76,6 @@ views: {
   }
 }
 });
-  // if none of the above states are matched, use this as the fallback
+  //default caso contrario use a rota X
   $urlRouterProvider.otherwise('/welcome');
 });

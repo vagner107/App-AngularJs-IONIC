@@ -1,9 +1,13 @@
+/*
+* Modulo Criado : starter.controllers;
+* include module: ionic
+*/
 angular.module('starter.controllers', ['ionic'])
 /***********************************************************************************
 * Controller : AppCtrl
-* $ionicModal: Modulo para abilitar modal IONIC
-* $timeout :  Modulo com metodos com temporizadores
-* $state : Modulo utilizado na app para direcionar para paginas
+* $ionicModal: Serviço para abilitar modal IONIC
+* $timeout :  Serviço com metodos com temporizadores
+* $state : Serviço utilizado na app para direcionar para paginas
 ***********************************************************************************/
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $state) {
   
@@ -14,22 +18,33 @@ angular.module('starter.controllers', ['ionic'])
 })
 /***********************************************************************************
 * Controller : vouchersCtrl
-* $stateParams: Metodo utilizado para redirecionar parametros pela URL como um php
+* $stateParams: Serviço utilizado para redirecionar parametros pela URL como um php
 ***********************************************************************************/
 .controller('vouchersCtrl', function($scope, $stateParams) {
 
-	var index = $stateParams[0];
-    var anotherKey = $stateParams[1];
-
   $scope.vouchers = [
-    { title: 'Ativo', id: 1, cod: 345 },
-    { title: 'N Ativo', id: 2 },
+    { title: 'Vouchers Ativos', status: 'A'},
+    { title: 'Vouchers Inativos', status: 'I'},
   ];
 })
 /***********************************************************************************
 * Controller : voucherCtrl
-* $stateParams: Metodo utilizado para redirecionar parametros pela URL como um php
+* $stateParams: Serviço utilizado para redirecionar parametros pela URL como um php
 ***********************************************************************************/
-.controller('voucherCtrl', function($scope, $stateParams) {
-   
+.controller('voucherCtrl', function($scope, $stateParams, $http) {
+		
+	if($stateParams.voucherId == 'A'){
+	 
+	$http.get('http://app.rjag.com.br/app-IOS/voucher_ativo.json')
+       .then(function(res){
+          $scope.todos = res.data;                
+        });
+	
+	}else if($stateParams.voucherId == 'I'){
+		
+	$http.get('http://app.rjag.com.br/app-IOS/voucher_inativo.json')
+       .then(function(res){
+          $scope.todos = res.data;                
+        });
+	}
 });
