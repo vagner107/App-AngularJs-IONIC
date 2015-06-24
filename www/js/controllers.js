@@ -35,7 +35,7 @@ angular.module('starter.controllers', ['ionic'])
 		
 	if($stateParams.voucherId == 'A'){
 	 
-	$http.get('http://app.rjag.com.br/app-IOS/voucher_ativo.json')
+	$http.get('http://app.rjag.com.br/app-IOS/login.json')
        .then(function(res){
           $scope.todos = res.data;                
         });

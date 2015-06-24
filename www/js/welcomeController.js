@@ -6,13 +6,13 @@ angular.module('starter.welcomeController', ['ionic'])
 * $state : Serviço utilizado na app para direcionar para paginas
 * $ionicLoading : Serviço loading IONIC
 * $ionicPopup : Serviço Popup IONIC (Alertas e Notificações)
-* $http > Serviços para estabelecer acesso http.
+* $http : Serviços para estabelecer acesso http.
 */
 .controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup, $http) {
 
 //********************************************* LOGIN  ***********************************************// 
 
-// LOADING
+	// LOADING TIMER 3000 Ms
 	$scope.show = function() {
 		$ionicLoading.show({
 		template: 'Aguarde...',
@@ -22,74 +22,88 @@ angular.module('starter.welcomeController', ['ionic'])
 	
 		});
 	};
-// LOADING
+	// LOADING TIMER 2000 Ms
+	$scope.show1 = function() {
+		$ionicLoading.show({
+		template: 'Aguarde...',
+		noBackdrop : false,
+		hideOnStateChange : false,
+		duration : '2000'
+	
+		});
+	};
+	// LOADING
 	$scope.hide = function(){
 		$ionicLoading.hide();
 	};
-//ALERTA LOGIN
-  $scope.showAlert = function() {
-   var alertPopup = $ionicPopup.alert({
-     title: 'Email ou Login incorretos',
-     template: 'Tente Novamente',
-	 delay : '4000',
-   	 buttons: [
-      	{text: '<b>Ok</b>',
-        type: 'button-energized'}]
-	 });
-   alertPopup.then(function(res) {
-     console.log('Obrigado por acessar');
-   });
- };
+	//ALERTA LOGIN
+	$scope.showAlert = function() {
+		var alertPopup = $ionicPopup.alert({
+			title: 'Email ou Login incorretos',
+			template: 'Tente Novamente',
+			delay : '4000',
+			buttons: [
+				{text: '<b>Ok</b>',
+				type: 'button-energized'}]
+		});
+		alertPopup.then(function(res) {
+			console.log('Obrigado por acessar');
+		});
+	};
    
-  $scope.loginData = {};
-  
-
-// CRIAR MODAL
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-// FHECHAR MODAL
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-// ABRIR MODAL
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
-  $scope.doLogin = function() {
-	if ($scope.loginData.username == 'admin' && $scope.loginData.password == 'admin')  
+	$scope.loginData = {};
+		
+	// CRIAR MODAL
+	$ionicModal.fromTemplateUrl('templates/login.html', {
+		scope: $scope
+	})
+	.then(function(modal) {
+		$scope.modal = modal;
+	});
 	
-	$timeout(function() {
-	  $scope.closeLogin();
-	  $scope.show();
-	  $state.go('app.vouchers', { 'index': 123, 'anotherKey': 'This is a test' });
-  	}, 1500);
+	// FHECHAR MODAL
+	$scope.closeLogin = function() {
+		$scope.modal.hide();
+	};
+	
+	// ABRIR MODAL
+	$scope.login = function() {
+		$scope.modal.show();
+	};
 
-	
-	else{
-	$scope.show();	
-	
-	$timeout(function() {
-		$scope.showAlert();
-	}, 3000);
-	
-	}
-	
+	$scope.doLogin = function() {
+		//FAZ SOLICITAÇÃO PASSANDO DADOS VIA POST, QUE SEJA GERADO UM JSON  
+		$http({
+		url: 'http://app.rjag.com.br/app-IOS/login-3.php', 
+		method: "POST",
+		params: {email: $scope.loginData.username, senha:$scope.loginData.password}
+		});
+		
+		//CAPTURADO DADOS DO JSON
+		$timeout(function(){
+			$http.get('http://app.rjag.com.br/app-IOS/login.json')
+			.then(function(res){
+				$scope.todo = res.data;
+				if($scope.todo > ''){
+					$timeout(function(){
+						$scope.closeLogin();
+						$scope.show1();
+						$state.go('app.vouchers');
+					}, 1000); 
+				}else{
+					$scope.show1();	
+					$timeout(function() {
+						$scope.showAlert();
+					}, 2000);
+				}
+				
+			});
+		}, 700);
+	};
 
-  };
-
-/*$scope.login=function(data){
-		loginService.login(data,$scope); //call login service
-};*/
-	    
-$scope.logout = function() {
-	$state.go('welcome');
-};
+	$scope.logout = function() {
+		$state.go('welcome');
+	};
   
   
 //********************************************* CADASTRO  ***********************************************// 

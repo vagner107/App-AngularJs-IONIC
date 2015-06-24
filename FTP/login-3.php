@@ -1,16 +1,17 @@
 <?php
+
    	
-/*include('connection.php');*/
+include('connection.php');
 
-/*
-$email = 'vagnerarau@gmail.com';
-$senha = '01071992';
 
-echo $sql1 = "SELECT
+$email = $_GET['email'];;
+$senha = $_GET['senha'];
+
+
+$sql1 = "SELECT
 		cliente.cod_cliente,
 		nome,
 		email,
-		senha,
 		voucher.data_validade_voucher,
 		produto
 		FROM cliente
@@ -20,9 +21,27 @@ echo $sql1 = "SELECT
 		ON voucher.cod_produto = produto.cod_produto
 		WHERE 
 		cliente.email = '$email'
-		AND cliente.senha = '$senha'";*/
+		AND cliente.senha = '$senha'";
 		
 
-/*$sql1 = @mysql_query($sql1);*/
+$sql1 = @mysql_query($sql1);
+
+
+$response = array();
+
+ while ($row = mysql_fetch_array($sql1)) {
+     $json["cod_cliente"] = $row[0];
+     $json["nome"] = $row[1];
+	 $json["email"] = $row[2];
+	 $json["data_validade_voucher"] = $row[3];
+	 $json["produto"] = $row[4];
+     array_push($response, $json);  
+}
+
+$string = "minha string";
+$fp = fopen('login.json', 'w');
+fwrite($fp, json_encode($response));
+fclose($fp);
+
 
 ?>
