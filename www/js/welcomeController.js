@@ -1,4 +1,25 @@
-angular.module('starter.welcomeController', ['ionic'])
+var serviceApp =  angular.module('starter.welcomeController', ['ionic']);
+
+
+
+serviceApp.service('statesService', function($http, $timeout) {
+	
+	var datas;
+	this.setData = function(){ 
+			$http.get('http://app.rjag.com.br/app-IOS/login.json')
+			.then(function(res){
+				datas = res.data;
+			
+			});
+	  };
+	  
+	this.getData = function() {
+		return datas;
+		datas = '';
+	};
+  
+});
+
 /*
 * Controller : WelcomeCtrl
 * $ionicModal: Serviço para abilitar modal IONIC, exemplo : Login , Cadastro, Esqueci minha senha
@@ -8,7 +29,7 @@ angular.module('starter.welcomeController', ['ionic'])
 * $ionicPopup : Serviço Popup IONIC (Alertas e Notificações)
 * $http : Serviços para estabelecer acesso http.
 */
-.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup, $http) {
+serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup, $http, statesService, $interval) {
 
 //********************************************* LOGIN  ***********************************************// 
 
@@ -28,7 +49,7 @@ angular.module('starter.welcomeController', ['ionic'])
 		template: 'Aguarde...',
 		noBackdrop : false,
 		hideOnStateChange : false,
-		duration : '2000'
+		duration : '3000'
 	
 		});
 	};
@@ -80,25 +101,21 @@ angular.module('starter.welcomeController', ['ionic'])
 		});
 		
 		//CAPTURADO DADOS DO JSON
-		$timeout(function(){
-			$http.get('http://app.rjag.com.br/app-IOS/login.json')
-			.then(function(res){
-				$scope.todo = res.data;
-				if($scope.todo > ''){
-					$timeout(function(){
-						$scope.closeLogin();
-						$scope.show1();
-						$state.go('app.vouchers');
-					}, 1000); 
-				}else{
-					$scope.show1();	
-					$timeout(function() {
-						$scope.showAlert();
-					}, 2000);
-				}
-				
-			});
-		}, 700);
+		statesService.setData();
+		
+		if(statesService.getData() > ''){	
+			$timeout(function(){
+				$scope.closeLogin();
+				$scope.show1();
+				$state.go('app.vouchers');
+			}, 200); 
+		}else{
+			$scope.show1();	
+			$timeout(function() {
+				$scope.showAlert();
+			}, 3000);
+		}
+
 	};
 
 	$scope.logout = function() {
@@ -240,4 +257,5 @@ angular.module('starter.welcomeController', ['ionic'])
   };
   
 
-})
+});
+

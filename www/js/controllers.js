@@ -34,6 +34,8 @@ angular.module('starter.controllers', ['ionic'])
 .controller('voucherCtrl', function($scope, $stateParams, $http) {
 		
 	if($stateParams.voucherId == 'A'){
+		
+
 	 
 	$http.get('http://app.rjag.com.br/app-IOS/login.json')
        .then(function(res){
@@ -47,4 +49,5 @@ angular.module('starter.controllers', ['ionic'])
           $scope.todos = res.data;                
         });
 	}
-});
+})
+
