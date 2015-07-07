@@ -2,7 +2,11 @@
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="todo in todos">
-        <div><b>{{todo.produto}}</b></div></br> Data Validade: {{todo.data_validade_voucher}}</div>
+      	<div ng-switch="todo.voucher_usado">
+        	<div ng-switch-when="{{status}}">
+            	<b>{{todo.produto}}</b><</br> Data Validade: {{todo.data_validade_voucher}}
+      		</div>
+        </div>
       </ion-item>
      </ion-list>
   </ion-content>

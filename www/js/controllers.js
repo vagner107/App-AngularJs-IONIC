@@ -35,12 +35,12 @@ angular.module('starter.controllers', ['ionic'])
 		
 	if($stateParams.voucherId == 'A'){
 		$scope.title = 'Vouchers Ativos';
-				
-		$http({
+		$scope.status = '0';		
+		/*$http({
 		url: 'http://app.rjag.com.br/app-IOS/login-3.php', 
 		method: "POST",
 		params: {email: statesService.email, senha:statesService.senha, status:0}
-		});
+		});*/
 		
 		statesService.setData();
 		$scope.todos = statesService.getData();
