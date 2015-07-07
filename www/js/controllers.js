@@ -34,6 +34,12 @@ angular.module('starter.controllers', ['ionic'])
 .controller('voucherCtrl', function($scope, $stateParams, $http, statesService) {
 		
 	if($stateParams.voucherId == 'A'){
+		$scope.show = function(todo) {
+			if(todo == '0'){
+				return true
+			}
+			
+		};
 		$scope.title = 'Vouchers Ativos';
 		$scope.status = '0';		
 		/*$http({
@@ -49,14 +55,16 @@ angular.module('starter.controllers', ['ionic'])
 	
 	}else if($stateParams.voucherId == 'U'){
 		
-	$scope.title = 'Vouchers Utilizados';	
-	
-	$http({
-		url: 'http://app.rjag.com.br/app-IOS/login-3.php', 
-		method: "POST",
-		params: {email: statesService.email, senha:statesService.senha, status:1}
-		});
+		$scope.title = 'Vouchers Utilizados';	
+		$scope.status = '1';
 		
+		$scope.show = function(todo) {
+			if(todo == '1'){
+				return true
+			}
+			
+		};	
+	
 		statesService.setData();
 		$scope.todos = statesService.getData();
 	

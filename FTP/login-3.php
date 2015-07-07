@@ -9,7 +9,7 @@ $senha = $_GET['senha'];
 $status = $_GET['status'];
 
 if($status > ''){
-	echo $sql1 = "SELECT
+	$sql1 = "SELECT
 			cliente.cod_cliente,
 			nome,
 			email,
