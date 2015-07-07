@@ -4,6 +4,8 @@ var serviceApp =  angular.module('starter.welcomeController', ['ionic']);
 
 serviceApp.service('statesService', function($http, $timeout) {
 	
+	var senha;
+	var email;
 	var datas;
 	this.setData = function(){ 
 			$http.get('http://app.rjag.com.br/app-IOS/login.json')
@@ -29,7 +31,7 @@ serviceApp.service('statesService', function($http, $timeout) {
 * $ionicPopup : Serviço Popup IONIC (Alertas e Notificações)
 * $http : Serviços para estabelecer acesso http.
 */
-serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup, $http, statesService, $interval) {
+serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup, $http, statesService) {
 
 //********************************************* LOGIN  ***********************************************// 
 
@@ -99,7 +101,8 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 		method: "POST",
 		params: {email: $scope.loginData.username, senha:$scope.loginData.password}
 		});
-		
+		statesService.email = $scope.loginData.username;
+		statesService.senha = $scope.loginData.password;
 		//CAPTURADO DADOS DO JSON
 		statesService.setData();
 		

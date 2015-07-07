@@ -6,8 +6,26 @@ include('connection.php');
 
 $email = $_GET['email'];;
 $senha = $_GET['senha'];
+$status = $_GET['status'];
 
-
+if($status > ''){
+	echo $sql1 = "SELECT
+			cliente.cod_cliente,
+			nome,
+			email,
+			voucher.data_validade_voucher,
+			produto,
+			voucher_usado
+			FROM cliente
+			INNER JOIN voucher
+			ON voucher.cod_cliente = cliente.cod_cliente
+			INNER JOIN produto
+			ON voucher.cod_produto = produto.cod_produto
+			WHERE 
+			cliente.email = '$email'
+			AND cliente.senha = '$senha'
+			AND voucher_usado = '$status'";
+}else{
 $sql1 = "SELECT
 			cliente.cod_cliente,
 			nome,
@@ -24,7 +42,7 @@ $sql1 = "SELECT
 			cliente.email = '$email'
 			AND cliente.senha = '$senha'";
 		
-
+}
 $sql1 = @mysql_query($sql1);
 
 

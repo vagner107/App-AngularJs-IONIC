@@ -1,9 +1,6 @@
-<ion-view view-title="Vouchers">
+<ion-view view-title="{{title}}">
   <ion-content>
     <ion-list>
-      <!--<ion-item ng-repeat="voucher in vouchers">
-        <div><b>{{voucher.name}}</b></div></br> Data Validade: {{voucher.date}}</div>
-      </ion-item>-->
       <ion-item ng-repeat="todo in todos">
         <div><b>{{todo.produto}}</b></div></br> Data Validade: {{todo.data_validade_voucher}}</div>
       </ion-item>

@@ -23,31 +23,43 @@ angular.module('starter.controllers', ['ionic'])
 .controller('vouchersCtrl', function($scope, $stateParams) {
 
   $scope.vouchers = [
-    { title: 'Vouchers Ativos', status: 'A'},
-    { title: 'Vouchers Inativos', status: 'I'},
+    { title: 'Voucher Ativo', status: 'A'},
+    { title: 'Voucher Utilizado', status: 'U'},
   ];
 })
 /***********************************************************************************
 * Controller : voucherCtrl
 * $stateParams: Serviço utilizado para redirecionar parametros pela URL como um php
 ***********************************************************************************/
-.controller('voucherCtrl', function($scope, $stateParams, $http) {
+.controller('voucherCtrl', function($scope, $stateParams, $http, statesService) {
 		
 	if($stateParams.voucherId == 'A'){
+		$scope.title = 'Vouchers Ativos';
+				
+		$http({
+		url: 'http://app.rjag.com.br/app-IOS/login-3.php', 
+		method: "POST",
+		params: {email: statesService.email, senha:statesService.senha, status:0}
+		});
 		
-
-	 
-	$http.get('http://app.rjag.com.br/app-IOS/login.json')
-       .then(function(res){
-          $scope.todos = res.data;                
-        });
+		statesService.setData();
+		$scope.todos = statesService.getData();
+		
+		
 	
-	}else if($stateParams.voucherId == 'I'){
+	}else if($stateParams.voucherId == 'U'){
 		
-	$http.get('http://app.rjag.com.br/app-IOS/voucher_inativo.json')
-       .then(function(res){
-          $scope.todos = res.data;                
-        });
+	$scope.title = 'Vouchers Utilizados';	
+	
+	$http({
+		url: 'http://app.rjag.com.br/app-IOS/login-3.php', 
+		method: "POST",
+		params: {email: statesService.email, senha:statesService.senha, status:1}
+		});
+		
+		statesService.setData();
+		$scope.todos = statesService.getData();
+	
 	}
 })
 
