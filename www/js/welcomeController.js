@@ -1,24 +1,23 @@
 var serviceApp =  angular.module('starter.welcomeController', ['ionic']);
 
+/*
+* Service : statesService
+* $timeout :  Serviço com metodos com temporizadores
+* $http : Serviços para estabelecer acesso http.
+*/
+serviceApp.service('statesService', function($http, $timeout) {
 
-
-serviceApp.service('statesService', function($http) {
-
-	var datas;
-	
+	datas = {};
 	this.setData = function(){ 
+		
 			$http.get('http://app.rjag.com.br/app-IOS/login.json')
 			.then(function(res){
 				datas = res.data;
-			
 			});
 	  };
-	  
 	this.getData = function() {
 		return datas;
-		datas = '';
 	};
-  
 });
 
 /*
@@ -45,12 +44,12 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 		});
 	};
 	// LOADING TIMER 2000 Ms
-	$scope.show1 = function() {
+	$scope.show1 = function(timer) {
 		$ionicLoading.show({
 		template: 'Aguarde...',
 		noBackdrop : false,
 		hideOnStateChange : false,
-		duration : '3000'
+		duration : timer
 	
 		});
 	};
@@ -102,23 +101,25 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 		});
 
 		//CAPTURADO DADOS DO JSON
-		$timeout(function(){
-		statesService.setData();
-		}, 200); 
+		$scope.show1(3000);
+		$timeout(function() {
+			statesService.setData();
+		}, 3000);
 		
-		if(statesService.getData() > ''){	
-		
-			$scope.closeLogin();
-			$scope.show1();
-			$state.go('app.vouchers');
-			
-		}else{
-			$scope.show1();	
-			$timeout(function() {
-				$scope.showAlert();
-			}, 3000);
-		}
-
+		$timeout(function() {
+			if(statesService.getData() > ''){	
+				
+				$scope.closeLogin();
+				$scope.show1(1000);
+				$state.go('app.vouchers');
+				
+			}else{
+				$scope.show1(2000);	
+				$timeout(function() {
+					$scope.showAlert();
+				}, 1000);
+			}
+		}, 4000);
 	};
 
 	$scope.logout = function() {
