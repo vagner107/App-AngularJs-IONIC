@@ -101,7 +101,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 		});
 
 		//CAPTURADO DADOS DO JSON
-		$scope.show1(3000);
+		$scope.show1(4000);
 		$timeout(function() {
 			statesService.setData();
 		}, 3000);
@@ -114,10 +114,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 				$state.go('app.vouchers');
 				
 			}else{
-				$scope.show1(2000);	
-				$timeout(function() {
-					$scope.showAlert();
-				}, 1000);
+				$scope.showAlert();
 			}
 		}, 4000);
 	};
