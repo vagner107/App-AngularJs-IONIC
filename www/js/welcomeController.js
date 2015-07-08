@@ -2,11 +2,10 @@ var serviceApp =  angular.module('starter.welcomeController', ['ionic']);
 
 
 
-serviceApp.service('statesService', function($http, $timeout) {
-	
-	var senha;
-	var email;
+serviceApp.service('statesService', function($http) {
+
 	var datas;
+	
 	this.setData = function(){ 
 			$http.get('http://app.rjag.com.br/app-IOS/login.json')
 			.then(function(res){
@@ -101,17 +100,18 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 		method: "POST",
 		params: {email: $scope.loginData.username, senha:$scope.loginData.password}
 		});
-		statesService.email = $scope.loginData.username;
-		statesService.senha = $scope.loginData.password;
+
 		//CAPTURADO DADOS DO JSON
+		$timeout(function(){
 		statesService.setData();
+		}, 200); 
 		
 		if(statesService.getData() > ''){	
-			$timeout(function(){
-				$scope.closeLogin();
-				$scope.show1();
-				$state.go('app.vouchers');
-			}, 200); 
+		
+			$scope.closeLogin();
+			$scope.show1();
+			$state.go('app.vouchers');
+			
 		}else{
 			$scope.show1();	
 			$timeout(function() {

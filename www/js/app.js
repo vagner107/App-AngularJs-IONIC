@@ -4,7 +4,7 @@
 *include module : starter.controllers
 * include module : starter.welcomeController
 */
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.welcomeController'])
+angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.deploy', 'starter.controllers', 'starter.welcomeController'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -20,6 +20,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.welcomeContr
     }
   });
 })
+
+.config(['$ionicAppProvider', function($ionicAppProvider) {
+  // Identify app
+  $ionicAppProvider.identify({
+    // The App ID (from apps.ionic.io) for the server
+    app_id: 'ad0347df',
+    // The public API key all services will use for this app
+    api_key: 'cf884265ec1abeac6cca906ead5e4847483a2bc7b7d3bc02'
+  });
+}])
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
