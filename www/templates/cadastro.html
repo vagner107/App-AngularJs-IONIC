@@ -12,10 +12,10 @@
           <span class="input-label">Nome Completo</span>
           <input class="username" name="nome" type="text" ng-model="cadastroData.nome" placeholder="Nome Completo" ng-minlenght="4" required>
         </label>
-        <label class="item item-input item-floating-label">
+        <label class="item item-input item-stacked-label">
             <span class="input-label">Data de Nascimento</span>
             <!--<input class="number" type="number" ng-model="cadastroData.data" ng-minlenght="4" required>-->
-            <input ui-datetime type="text" data-ng-model="{{cadastroData.data|date:'dd/MM/yyyy'}}" placeholder="Data de Nascimento"/>
+            <input class="datepicker" type="text" ng-model="cadastroData.data" required/>
         </label>
         <label class="item item-input item-floating-label">
           <span class="input-label">Email</span>
