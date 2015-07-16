@@ -14,7 +14,7 @@ $sql1 = @mysql_query($sql1);
 $row = mysql_fetch_array($sql1);
 $j = $row['email'];
 $response = array();
-if($j == ''){ 
+if(($j == '') && ($_GET['email'] <> '')){ 
 
 	 $sql = "INSERT INTO cliente SET 
 				data_aniversario = '$data',

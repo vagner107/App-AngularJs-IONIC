@@ -232,7 +232,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 			
 			$timeout(function() { // Obter dados do Json existente: quando o email ja existe no banco
 				$scope.setCad();// realizado: quando o cadastro foi concluido com exito
-			}, 4000);
+			}, 3000);
 		
 			$timeout(function() {
 				if($scope.getCad() > ''){	
@@ -240,12 +240,14 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 					$scope.closeCadastro();
 					$timeout(function() {
 						$scope.showAlertCadastroRealizado();
-					}, 1000);
+					},500);
 					
 				}else{
-					$scope.showAlertEmailExistente();
+					
+						$scope.showAlertEmailExistente();
+					
 				}
-			}, 1000);
+			}, 4000);
 
 		}
 	
