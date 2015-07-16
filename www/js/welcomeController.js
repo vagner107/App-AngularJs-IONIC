@@ -240,12 +240,12 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 					$scope.closeCadastro();
 					$timeout(function() {
 						$scope.showAlertCadastroRealizado();
-					}, 2000);
+					}, 1000);
 					
 				}else{
 					$scope.showAlertEmailExistente();
 				}
-			}, 5000);
+			}, 1000);
 
 		}
 	
