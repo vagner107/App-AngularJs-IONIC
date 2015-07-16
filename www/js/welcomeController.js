@@ -101,10 +101,10 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 		});
 
 		//CAPTURADO DADOS DO JSON
-		$scope.show1(4000);
+		$scope.show1(5000);
 		$timeout(function() {
 			statesService.setData();
-		}, 3000);
+		}, 4000);
 		
 		$timeout(function() {
 			if(statesService.getData() > ''){	
@@ -116,7 +116,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 			}else{
 				$scope.showAlert();
 			}
-		}, 4000);
+		}, 5000);
 	};
 
 	$scope.logout = function() {
@@ -127,15 +127,26 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 //********************************************* CADASTRO  ***********************************************// 
  
 	$scope.cadastroData = {};
-
-	$scope.showAlertCadastro = function() {
+	
+	$scope.showAlertName = function() {
+	   var alertPopup = $ionicPopup.alert({
+		 title: 'Informe seu nome Completo',
+		 template: 'Tente Novamente !',
+		 delay : '4000',
+		 buttons: [
+		{text: '<b>Ok</b>',
+		type: 'button-energized'}]
+	   });
+	 };
+	 
+	$scope.showAlertSenha = function() {
 	   var alertPopup = $ionicPopup.alert({
 		 title: 'Sua senha não é Segura',
 		 template: 'Tente Novamente !',
 		 delay : '4000',
 		 buttons: [
-      	{text: '<b>Ok</b>',
-        type: 'button-energized'}]
+		{text: '<b>Ok</b>',
+		type: 'button-energized'}]
 	   });
 	   alertPopup.then(function(res) {
 		 console.log('Obrigado');
@@ -147,49 +158,86 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 		 title: 'Cadastro Realizado com Êxito',
 		 template: 'Lets Eat !!!!!',
 		 delay : '4000',
-	  	 buttons: [
-      	{text: '<b>Ok</b>',
-        type: 'button-energized'}]
+		 buttons: [
+		{text: '<b>Ok</b>',
+		type: 'button-energized'}]
 	   });
 	   alertPopup.then(function(res) {
 		 console.log('Obrigado');
 	   });
 	};
- 	
+	
+	$scope.showAlertEmailExistente = function() {
+	   var alertPopup = $ionicPopup.alert({
+		 title: 'E-mail Existente',
+		 template: 'Utilize outro E-mail',
+		 delay : '4000',
+		 buttons: [
+		{text: '<b>Ok</b>',
+		type: 'button-energized'}]
+	   });
+	   alertPopup.then(function(res) {
+		 console.log('Obrigado');
+	   });
+	};
 	
 	$ionicModal.fromTemplateUrl('templates/cadastro.html', {
 		scope: $scope
 	}).then(function(modal1) {
 		$scope.modal1 = modal1;
 	});
-
-  
-  $scope.closeCadastro = function() {
-    $scope.modal1.hide();
-  };
-
- 
-  $scope.cadastro = function() {
-    $scope.modal1.show();
-  };
-
-  
-  $scope.doCadastro = function() {
-	if ($scope.cadastroData.password.length >= 6){  
-		$scope.closeCadastro();
-		$scope.show();
-		$timeout(function() {
-		  $scope.showAlertCadastroRealizado();
-		}, 3000);
 	
-  }else{
-	$scope.show();	
-	$timeout(function() {
-		$scope.showAlertCadastro();
-	}, 3000);
 	
-	}
-  };
+	$scope.closeCadastro = function() {
+	$scope.modal1.hide();
+	};
+	
+	
+	$scope.cadastro = function() {
+	$scope.modal1.show();
+	};
+
+	
+	$scope.doCadastro = function() {
+		if ($scope.cadastroData.password.length < 6){ // Validação Senha
+			$scope.show();	
+			$timeout(function() {
+				$scope.showAlertSenha();
+			}, 3000);
+		}else if($scope.cadastroData.nome.length < 13){ // Validação Nome
+			$scope.show();	
+			$timeout(function() {
+				$scope.showAlertName();
+			}, 3000);
+		}else{ // Se tudo der certi, ira enviar os dados para o PHP enviando parametros
+			$scope.show();
+			$http({
+				url: 'http://app.rjag.com.br/app-IOS/cadastro.php', 
+				method: "POST",
+				params: {nome:$scope.cadastroData.nome, data:$scope.cadastroData.data, email:$scope.cadastroData.email, senha:$scope.cadastroData.			                password					            }
+			});
+			
+			
+			$http.get('http://app.rjag.com.br/app-IOS/cadastro_status.json') // Obter dados do Json existente: quando o email ja existe no banco
+				.then(function(res){							  // realizado: quando o cadastro foi concluido com exito
+					cadastroStatus = res.data;
+			});
+			
+			if(cadastroStatus.cadastro == 'realizado'){ // Validando resultado, se o email é existente ou Ñ
+				$scope.closeCadastro();
+				$timeout(function() {
+					$scope.showAlertCadastroRealizado();
+				}, 3000);
+			}else{
+				$timeout(function() {
+					$scope.showAlertEmailExistente();
+				}, 3000);
+			}
+				
+			
+		}
+	
+	};
   
 //********************************************* RECUPERAR SENHA  ***********************************************//
 
@@ -209,7 +257,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 	   });
 	};
 	
-	$scope.showAlertSenha = function() {
+	$scope.showAlertEmail = function() {
 	   var alertPopup = $ionicPopup.alert({
 		 title: 'Email Incorreto',
 		 template: 'Tente Novamente',
@@ -251,7 +299,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
   }else{
 	$scope.show();	
 	$timeout(function() {
-		$scope.showAlertSenha();
+		$scope.showAlertEmail();
 	}, 3000);
 	
 	}

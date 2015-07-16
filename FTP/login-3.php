@@ -21,6 +21,20 @@ $sql1 = "SELECT
 			AND cliente.senha = '$senha'";
 
 $sql1 = @mysql_query($sql1);
+$row1 = mysql_fetch_array($sql1);
+$name = $row1['nome'];
+$email1 = $row1['email'];
+
+if($name == '' && $email1 ==''){
+	echo $sql1 = "SELECT	nome,
+			email
+			FROM cliente
+			WHERE email = '$email'
+			AND senha = '$senha'";
+	$sql1 = @mysql_query($sql1);
+}
+
+
 $response = array();
 
  while ($row = mysql_fetch_array($sql1)) {
