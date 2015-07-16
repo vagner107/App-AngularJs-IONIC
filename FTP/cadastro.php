@@ -13,12 +13,8 @@ $sql1 = "SELECT email FROM cliente
 $sql1 = @mysql_query($sql1);
 $row = mysql_fetch_array($sql1);
 $j = $row['email'];
-
-if($j != ''){ /* se email existir ele cria um json com o dado existente*/
-	$response = array();		
-	$json['cadastro'] = 'existente';
-	array_push($response, $json);  
-}else{/* se email não existir ele cria um json com o dado realizado*/
+$response = array();
+if($j == ''){ 
 
 	 $sql = "INSERT INTO cliente SET 
 				data_aniversario = '$data',

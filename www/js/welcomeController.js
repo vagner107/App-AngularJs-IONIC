@@ -128,12 +128,24 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
  
 	$scope.cadastroData = {};
 	
+	cad = {};
+	$scope.setCad = function(){ 
+		
+			$http.get('http://app.rjag.com.br/app-IOS/cadastro_status.json')
+			.then(function(res){
+				cad = res.data;
+			});
+	  };
+	$scope.getCad = function() {
+		return cad;
+	};
+	
 	$scope.showAlertName = function() {
 	   var alertPopup = $ionicPopup.alert({
-		 title: 'Informe seu nome Completo',
-		 template: 'Tente Novamente !',
-		 delay : '4000',
-		 buttons: [
+		title: 'Informe seu nome Completo',
+		template: 'Tente Novamente !',
+		delay : '4000',
+		buttons: [
 		{text: '<b>Ok</b>',
 		type: 'button-energized'}]
 	   });
@@ -218,23 +230,23 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 			});
 			
 			
-			$http.get('http://app.rjag.com.br/app-IOS/cadastro_status.json') // Obter dados do Json existente: quando o email ja existe no banco
-				.then(function(res){							  // realizado: quando o cadastro foi concluido com exito
-					cadastroStatus = res.data;
-			});
-			
-			if(cadastroStatus.cadastro == 'realizado'){ // Validando resultado, se o email é existente ou Ñ
-				$scope.closeCadastro();
-				$timeout(function() {
-					$scope.showAlertCadastroRealizado();
-				}, 3000);
-			}else{
-				$timeout(function() {
+			$timeout(function() { // Obter dados do Json existente: quando o email ja existe no banco
+				$scope.setCad();// realizado: quando o cadastro foi concluido com exito
+			}, 4000);
+		
+			$timeout(function() {
+				if($scope.getCad() > ''){	
+					
+					$scope.closeCadastro();
+					$timeout(function() {
+						$scope.showAlertCadastroRealizado();
+					}, 2000);
+					
+				}else{
 					$scope.showAlertEmailExistente();
-				}, 3000);
-			}
-				
-			
+				}
+			}, 5000);
+
 		}
 	
 	};

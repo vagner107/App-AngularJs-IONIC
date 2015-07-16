@@ -26,7 +26,7 @@ $name = $row1['nome'];
 $email1 = $row1['email'];
 
 if($name == '' && $email1 ==''){
-	echo $sql1 = "SELECT	nome,
+	$sql1 = "SELECT	nome,
 			email
 			FROM cliente
 			WHERE email = '$email'
