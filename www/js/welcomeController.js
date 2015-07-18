@@ -126,7 +126,9 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
   
 //********************************************* CADASTRO  ***********************************************// 
  
-	$scope.cadastroData = {};
+	$scope.cadastroData = {
+		data: new Date()
+	};
 	
 	cad = {};
 	$scope.setCad = function(){ 

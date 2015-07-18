@@ -14,17 +14,8 @@
         </label>
         <label class="item item-input item-floating-label">
             <span class="input-label">Data de Nascimento</span>
-            <input class="date" type="date" ng-model="cadastroData.data" ng-minlenght="4" placeholder="Data de Nascimento" required>
-<!-- 			<input
-        class="form-control"
-        name="dateField"
-        id="dateField"
-        type="text"
-        required
-        placeholder="DD/MM/AAAA"
-        ng-pattern="/^((\d{4})-(\d{2})-(\d{2})|(\d{2})\/(\d{2})\/(\d{4}))$/"
-        ng-model="model.date">-->
-          
+            <!--<input class="date" type="datepicker" ng-model="cadastroData.data" ng-minlenght="4" placeholder="Data de Nascimento" required>-->
+            <input type="date" id="exampleInput" name="input" ng-model="cadastroData.data" placeholder="dd-mm-yyyy"  required />
         </label>
         <label class="item item-input item-floating-label">
           <span class="input-label">Email</span>
