@@ -71,7 +71,8 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 			console.log('Obrigado por acessar');
 		});
 	};
-   
+   	
+	// Objeto criado para recuperação do login
 	$scope.loginData = {};
 		
 	// CRIAR MODAL
@@ -125,7 +126,8 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
   
   
 //********************************************* CADASTRO  ***********************************************// 
- 
+ 	
+	// Objeto criado para recuperação do cadastro
 	$scope.cadastroData = {
 		data: new Date()
 	};
@@ -242,6 +244,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 					$scope.closeCadastro();
 					$timeout(function() {
 						$scope.showAlertCadastroRealizado();
+						$scope.cadastroData = {};
 					},500);
 					
 				}else{
@@ -255,10 +258,15 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 	
 	};
   
+  
 //********************************************* RECUPERAR SENHA  ***********************************************//
 
-	$scope.senhaData = {};
- 
+	
+		
+	// Objeto criado para recuperação de senhas
+	$scope.senhaData = {}; 
+	
+	// Alerta de senha enviada 
 	$scope.showAlertSenhaEnviada = function() {
 	   var alertPopup = $ionicPopup.alert({
 		 title: 'Senha Enviada',
@@ -273,6 +281,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 	   });
 	};
 	
+	//Alerta de email incorreto, nao correspondendo aos dados do Banco de Dados
 	$scope.showAlertEmail = function() {
 	   var alertPopup = $ionicPopup.alert({
 		 title: 'Email Incorreto',
@@ -287,40 +296,65 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 	   });
 	};
 
-  // Cria modal 
-  $ionicModal.fromTemplateUrl('templates/recuperarSenha.html', {
-    scope: $scope
-  }).then(function(modal2) {
-    $scope.modal2 = modal2;
-  });
+	// Criando modal que chamara a URL
+	$ionicModal.fromTemplateUrl('templates/recuperarSenha.html', {
+	scope: $scope
+	}).then(function(modal2) {
+		$scope.modal2 = modal2;
+	});
 
-  // fechar modal 
-  $scope.closeSenha = function() {
-    $scope.modal2.hide();
-  };
+  	// Close do Moodal 
+	$scope.closeSenha = function() {
+		$scope.modal2.hide();
+	};
 
-  // abrir modal
-  $scope.senhaRecupera = function() {
-    $scope.modal2.show();
-  };
-
-   $scope.doSenha = function() {
-	if ($scope.senhaData.email.length >= 9){  
-		$scope.closeSenha();
+	// Open do Modal
+	$scope.senhaRecupera = function() {
+		$scope.modal2.show();
+	};
+	
+ 	
+	// objeto para armazenamento dos dados capturados do json
+ 	esqueci = {};
+	
+	// Metodo criado para obter valores do jSon
+	$scope.setEsqueci = function(){  
+			$http.get('http://app.rjag.com.br/app-IOS/esqueci_response.json')
+			.then(function(res){
+				esqueci = res.data;
+			});
+	  };
+	
+	// metodo retorna o valor dos dados capturados  
+	$scope.getEsqueci = function() {
+		return esqueci;
+	};
+	
+	$scope.doSenha = function() {
 		$scope.show();
-		$timeout(function() {
-		  $scope.showAlertSenhaEnviada();
+		$http({
+			url: 'http://app.rjag.com.br/app-IOS/esqueci.php', 
+			method: "POST",
+			params: {email:$scope.senhaData.email}
+		});
+		
+		$timeout(function() { // Obter dados do Json existente: quando o email ja existe no banco
+			$scope.setEsqueci();// realizado: quando o cadastro foi concluido com exito
 		}, 3000);
 	
-  }else{
-	$scope.show();	
-	$timeout(function() {
-		$scope.showAlertEmail();
-	}, 3000);
-	
-	}
-  };
+		$timeout(function() {
+			if($scope.getEsqueci() > ''){	
+				$scope.closeSenha();
+				$timeout(function() {
+					$scope.showAlertSenhaEnviada();
+					$scope.senhaData = {};
+				},500);
+				
+			}else{
+				$scope.showAlertEmail();
+			}
+		}, 4000);
+	}; // fechamento $scope.doSenha
   
-
-});
+});// fechando serviceApp.controller
 
