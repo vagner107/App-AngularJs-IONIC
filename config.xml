@@ -11,7 +11,7 @@
   
   <icon src="resources/icon.png" />
   
-  <gap:splash src="resources/splash.png" />
+  <gap:splash src="resources/icons/splash.png" />
    
   <access origin="*"/>
   <preference name="orientation" value="portrait" />  <!-- Tipo de tela-->
