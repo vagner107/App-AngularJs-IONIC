@@ -9,14 +9,13 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.deploy'
 .run(function($ionicPlatform) {
 
   $ionicPlatform.ready(function() {
+	
+	navigator.splashscreen.show();
 	  
 	setTimeout(function() {
         navigator.splashscreen.hide();
     }, 100);  
 	
-	 if(window.navigator && window.navigator.splashscreen) {
-      window.navigator.splashscreen.hide();
-    }
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {

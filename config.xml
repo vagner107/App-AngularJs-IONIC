@@ -9,7 +9,7 @@
     </author>
   <content src="index.html"/>
   
-  <icon src="resources/icons/icon.png" />
+  <icon src="resources/ios/icon/icon.png" />
   
 
   <access origin="*"/>
