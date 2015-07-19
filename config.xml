@@ -9,10 +9,10 @@
     </author>
   <content src="index.html"/>
   
-  <icon src="resources/icon.png" />
+  <icon src="resources/icons/icon.png" />
   
-  <gap:splash src="resources/icons/splash.png" />
-   
+<!--  <gap:splash src="resources/icons/splash.png" />
+-->   
   <access origin="*"/>
   <preference name="orientation" value="portrait" />  <!-- Tipo de tela-->
   <preference name="fullscreen" value="false" />      
