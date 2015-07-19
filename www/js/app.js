@@ -14,7 +14,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.deploy'
 	  
 	setTimeout(function() {
         navigator.splashscreen.hide();
-    }, 100);  
+    }, 200);  
 	
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
