@@ -11,8 +11,8 @@
   
   <icon src="resources/icons/icon.png" />
   
-<!--  <gap:splash src="resources/icons/splash.png" />
--->   
+  <gap:splash src="resources/splash/splash.png" />
+   
   <access origin="*"/>
   <preference name="orientation" value="portrait" />  <!-- Tipo de tela-->
   <preference name="fullscreen" value="false" />      
