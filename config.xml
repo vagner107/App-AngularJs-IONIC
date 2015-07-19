@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.appios233816" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Double Let's Eat IOS</name>
-  <description>
-       Um projeto Cordova e Ionic Framework : Vagner Araújo.
+  <description>&#xD;
+       Um projeto Cordova e Ionic Framework : Vagner Araújo.&#xD;
     </description>
-  <author email="vagnerarau@gmail.com" href="">
-      Vagner Araújo;
+  <author email="vagnerarau@gmail.com" href="">&#xD;
+      Vagner Araújo;&#xD;
     </author>
   <content src="index.html"/>
-  <icon src="resources/ios/icon/icon.png"/>
+  <icon src="resources\ios\icon\icon-40@2x.png"/>
   <access origin="*"/>
-  
   <preference name="orientation" value="portrait"/>
   <preference name="fullscreen" value="false"/>
   <preference name="webviewbounce" value="false"/>
@@ -23,18 +22,25 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
-  
-  <splash src="resources\ios\splash\splash.png"/>
-  
   <platform name="android">
+    <icon src="resources\android\icon\drawable-ldpi-icon.png" density="ldpi"/>
+    <icon src="resources\android\icon\drawable-mdpi-icon.png" density="mdpi"/>
+    <icon src="resources\android\icon\drawable-hdpi-icon.png" density="hdpi"/>
     <splash src="resources\android\splash\drawable-port-ldpi-screen.png" density="port-ldpi"/>
     <splash src="resources\android\splash\drawable-port-mdpi-screen.png" density="port-mdpi"/>
     <splash src="resources\android\splash\drawable-port-hdpi-screen.png" density="port-hdpi"/>
   </platform>
-  
   <platform name="ios">
+    <icon src="resources\ios\icon\icon.png" width="57" height="57"/>
+    <icon src="resources\ios\icon\icon-40.png" width="40" height="40"/>
+    <icon src="resources\ios\icon\icon-40@2x.png" width="80" height="80"/>
+    <icon src="resources\ios\icon\icon-50.png" width="50" height="50"/>
+    <icon src="resources\ios\icon\icon-60.png" width="60" height="60"/>
+    <icon src="resources\ios\icon\icon-72.png" width="72" height="72"/>
+    <icon src="resources\ios\icon\icon-76.png" width="76" height="76"/>
+    <icon src="resources\ios\icon\icon-small.png" width="29" height="29"/>
+    <icon src="resources\ios\icon\icon-small@2x.png" width="58" height="58"/>
     <splash src="resources\ios\splash\Default@2x~iphone.png" width="640" height="960"/>
     <splash src="resources\ios\splash\Default~iphone.png" width="320" height="480"/>
   </platform>
-  
 </widget>
