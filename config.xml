@@ -23,8 +23,6 @@
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
   <platform name="android">
-    <gap:splash src="resources\android\splash\splash.png" gap:platform="android" gap:qualifier="ldpi"/>
-    <gap:splash src="resources\android\splash\splash.png" gap:platform="android" gap:qualifier="mdpi"/>
     <splash src="resources\android\splash\drawable-port-ldpi-screen.png" density="port-ldpi"/>
     <splash src="resources\android\splash\drawable-port-mdpi-screen.png" density="port-mdpi"/>
     <splash src="resources\android\splash\drawable-port-hdpi-screen.png" density="port-hdpi"/>
