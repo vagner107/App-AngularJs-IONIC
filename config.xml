@@ -11,6 +11,7 @@
   
   <icon src="resources/icons/icon.png" />
   
+ <gap:splash src="resources/splash/splash.png" gap:platform="android" gap:qualifier="hdpi" />
    
   <access origin="*"/>
   <preference name="orientation" value="portrait" />  <!-- Tipo de tela-->
