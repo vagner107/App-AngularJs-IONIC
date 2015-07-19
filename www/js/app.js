@@ -8,11 +8,11 @@ angular.module('starter', ['ionic','ngCordova', 'ionic.service.core', 'ionic.ser
 
 .run(function($ionicPlatform, $cordovaSplashscreen) {
 	
-	$cordovaSplashscreen.hide();
+	$cordovaSplashscreen.show();
 	
 	setTimeout(function() {
-    $cordovaSplashscreen.hide()
-  }, 3000)
+   	 $cordovaSplashscreen.hide()
+ 	 }, 3000)
   
   $ionicPlatform.ready(function() {
 
