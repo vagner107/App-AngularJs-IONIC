@@ -10,6 +10,7 @@
   <content src="index.html"/>
   <icon src="resources/ios/icon/icon.png"/>
   <access origin="*"/>
+  
   <preference name="orientation" value="portrait"/>
   <preference name="fullscreen" value="false"/>
   <preference name="webviewbounce" value="false"/>
@@ -22,13 +23,18 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
+  
+  <splash src="resources\ios\splash\splash.png"/>
+  
   <platform name="android">
     <splash src="resources\android\splash\drawable-port-ldpi-screen.png" density="port-ldpi"/>
     <splash src="resources\android\splash\drawable-port-mdpi-screen.png" density="port-mdpi"/>
     <splash src="resources\android\splash\drawable-port-hdpi-screen.png" density="port-hdpi"/>
   </platform>
+  
   <platform name="ios">
     <splash src="resources\ios\splash\Default@2x~iphone.png" width="640" height="960"/>
     <splash src="resources\ios\splash\Default~iphone.png" width="320" height="480"/>
   </platform>
+  
 </widget>
