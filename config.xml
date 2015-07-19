@@ -33,7 +33,7 @@
   
   
    <icon src="resources\android\icon\icon.png"/>
-   <splash src="resources\android\splash\drawable-port-ldpi-screen.png"/>
+   <splash src="resources\android\splash\splash.png"/>
    
   <platform name="android">
     <icon src="resources\android\icon\drawable-ldpi-icon.png"/>
