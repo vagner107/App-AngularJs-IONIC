@@ -8,8 +8,9 @@
       Vagner Araújo
     </author>
   <content src="index.html"/>
-  <icon src="images/logo2.png" />
   
+  <icon src="resources/icon.png" />
+   
   <access origin="*"/>
   <preference name="orientation" value="portrait" />  <!-- Tipo de tela-->
   <preference name="fullscreen" value="false" />      
@@ -18,6 +19,7 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
+  
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
