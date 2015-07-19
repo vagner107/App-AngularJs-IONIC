@@ -5,7 +5,7 @@ $email = $_GET['email'];
 
 $result = mysql_query("SELECT * FROM cliente WHERE email='$email'");
 
-$num_rows = mysql_num_rows($result);
+$num_rows = mysql_num_rows($result);	
 //se tiver  + de 1 cadastrado
 if($num_rows >= 1){
 	//faz um while para vc coloar os dados nas variavels
