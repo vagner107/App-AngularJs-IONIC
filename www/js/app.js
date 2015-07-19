@@ -8,13 +8,7 @@ angular.module('starter', ['ionic','ngCordova', 'ionic.service.core', 'ionic.ser
 
 .run(function($ionicPlatform, $cordovaSplashscreen) {
 	
-	$cordovaSplashscreen.show();
-	
-	setTimeout(function() {
-   	 $cordovaSplashscreen.hide()
- 	 }, 3000)
-  
-  $ionicPlatform.ready(function() {
+ $ionicPlatform.ready(function() {
 
 		
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
