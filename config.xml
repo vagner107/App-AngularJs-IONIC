@@ -17,11 +17,20 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
-  <preference name="SplashScreen" value="screen"/>
-  <preference name="SplashScreenDelay" value="3000"/>
+  <preference name="splashscreen" value="splash" />
+  <preference name="splashScreenDelay" value="10000" />
+  
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
+  
+  <feature name="SplashScreen">
+      <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+  </feature>
+  <feature name="SplashScreen">
+      <param name="ios-package" value="CDVSplashScreen" />
+  </feature>
+  
   <platform name="android">
     <icon src="resources\android\icon\drawable-ldpi-icon.png" density="ldpi"/>
     <icon src="resources\android\icon\drawable-mdpi-icon.png" density="mdpi"/>
@@ -30,6 +39,7 @@
     <splash src="resources\android\splash\drawable-port-mdpi-screen.png" density="port-mdpi"/>
     <splash src="resources\android\splash\drawable-port-hdpi-screen.png" density="port-hdpi"/>
   </platform>
+  
   <platform name="ios">
     <icon src="resources\ios\icon\icon.png" width="57" height="57"/>
     <icon src="resources\ios\icon\icon-40.png" width="40" height="40"/>
