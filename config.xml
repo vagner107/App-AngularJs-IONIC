@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.appios233816" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Double Let's Eat IOS</name>
-  <description>&#xD;
-       Um projeto Cordova e Ionic Framework : Vagner Araújo.&#xD;
+  <description>&#xD;&#xD;
+       Um projeto Cordova e Ionic Framework : Vagner Araújo.&#xD;&#xD;
     </description>
-  <author email="vagnerarau@gmail.com" href="">&#xD;
-      Vagner Araújo;&#xD;
+  <author email="vagnerarau@gmail.com" href="">&#xD;&#xD;
+      Vagner Araújo;&#xD;&#xD;
     </author>
   <content src="index.html"/>
   <icon src="resources/ios/icon/icon.png"/>
-  
   <access origin="*"/>
   <preference name="orientation" value="portrait"/>
   <preference name="fullscreen" value="false"/>
@@ -18,16 +17,14 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
-  <preference name="AutoHideSplashScreen" value="true"/>
-  <preference name="ShowSplashScreenSpinner" value="true"/>
-  
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
+  
+  <gap:splash src="resources\ios\splash\splash.png" />
   
   <platform name="ios">
     <splash src="resources\ios\splash\Default@2x~iphone.png" width="640" height="960"/>
     <splash src="resources\ios\splash\Default~iphone.png" width="320" height="480"/>
   </platform>
-  
 </widget>
