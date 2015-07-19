@@ -4,10 +4,10 @@
 *include module : starter.controllers
 * include module : starter.welcomeController
 */
-angular.module('starter', ['ionic','ngCordova', 'ionic.service.core', 'ionic.service.deploy', 'starter.controllers', 'starter.welcomeController'])
+angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.deploy', 'starter.controllers', 'starter.welcomeController'])
 
 .run(function($ionicPlatform) {
-	
+
  $ionicPlatform.ready(function() {
 	
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
