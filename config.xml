@@ -5,7 +5,7 @@
        Um projeto Cordova e Ionic Framework : Vagner Araújo.&#xD;
     </description>
   <author email="vagnerarau@gmail.com" href="">&#xD;
-      Vagner Araújo;&#xD;
+      Vagner Araújo&#xD;
     </author>
   <content src="index.html"/>
   <icon src="resources\ios\icon\icon-40@2x.png"/>
@@ -17,34 +17,25 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
-  <preference name="splashscreen" value="splash" />
-  <preference name="splashScreenDelay" value="10000" />
+  <preference name="SplashScreen" value="splash"/>
+  <preference name="SplashScreenDelay" value="3000"/>
   
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
   
-  <feature name="SplashScreen">
-      <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
-  </feature>
-  <feature name="SplashScreen">
-      <param name="ios-package" value="CDVSplashScreen" />
-  </feature>
-  
-  
-   <icon src="resources\android\icon\icon.png"/>
-   <splash src="resources\android\splash\splash.png"/>
-   
   <platform name="android">
-    <icon src="resources\android\icon\drawable-ldpi-icon.png"/>
-    <icon src="resources\android\icon\drawable-mdpi-icon.png" density="mdpi"/>
-    <icon src="resources\android\icon\drawable-hdpi-icon.png" density="hdpi"/>
-    <splash src="resources\android\splash\drawable-port-ldpi-screen.png"/>
+    <splash src="resources\android\splash\drawable-port-ldpi-screen.png" density="port-ldpi"/>
     <splash src="resources\android\splash\drawable-port-mdpi-screen.png" density="port-mdpi"/>
     <splash src="resources\android\splash\drawable-port-hdpi-screen.png" density="port-hdpi"/>
+    <icon src="resources\android\icon\drawable-ldpi-icon.png" density="ldpi"/>
+    <icon src="resources\android\icon\drawable-mdpi-icon.png" density="mdpi"/>
+    <icon src="resources\android\icon\drawable-hdpi-icon.png" density="hdpi"/>
   </platform>
   
   <platform name="ios">
+    <splash src="resources\ios\splash\Default@2x~iphone.png" width="640" height="960"/>
+    <splash src="resources\ios\splash\Default~iphone.png" width="320" height="480"/>
     <icon src="resources\ios\icon\icon.png" width="57" height="57"/>
     <icon src="resources\ios\icon\icon-40.png" width="40" height="40"/>
     <icon src="resources\ios\icon\icon-40@2x.png" width="80" height="80"/>
@@ -54,7 +45,6 @@
     <icon src="resources\ios\icon\icon-76.png" width="76" height="76"/>
     <icon src="resources\ios\icon\icon-small.png" width="29" height="29"/>
     <icon src="resources\ios\icon\icon-small@2x.png" width="58" height="58"/>
-    <splash src="resources\ios\splash\Default@2x~iphone.png" width="640" height="960"/>
-    <splash src="resources\ios\splash\Default~iphone.png" width="320" height="480"/>
   </platform>
+  
 </widget>

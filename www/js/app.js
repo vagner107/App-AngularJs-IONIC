@@ -4,10 +4,16 @@
 *include module : starter.controllers
 * include module : starter.welcomeController
 */
-angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.deploy', 'starter.controllers', 'starter.welcomeController'])
+angular.module('starter', ['ionic','ngCordova', 'ionic.service.core', 'ionic.service.deploy', 'starter.controllers', 'starter.welcomeController'])
 
-.run(function($ionicPlatform) {
-
+.run(function($ionicPlatform, $cordovaSplashscreen) {
+	
+	$cordovaSplashscreen.hide();
+	
+	setTimeout(function() {
+    $cordovaSplashscreen.hide()
+  }, 3000)
+  
   $ionicPlatform.ready(function() {
 
 		
