@@ -15,6 +15,7 @@
     "shelljs": "^0.3.0"
   },
   "cordovaPlugins": [
-    "https://github.com/driftyco/ionic-plugins-deploy"
+    "https://github.com/driftyco/ionic-plugins-deploy",
+    "org.apache.cordova.splashscreen"
   ]
 }

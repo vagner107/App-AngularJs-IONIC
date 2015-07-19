@@ -20,19 +20,13 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
-  
+   
+  <preference name="AutoHideSplashScreen" value="false" />
+  <preference name="ShowSplashScreenSpinner" value="false" />
+
+
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
-  
-	
-	<gap:plugin name="org.apache.cordova.splashscreen"  />
-	<feature name="SplashScreen">
-		<param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
-		<param name="ios-package" value="CDVSplashScreen" />
-	</feature>
-	<gap:splash src="resources/splash/splash.png" />
-	<gap:splash src="resources/splash/splash.png" gap:platform="ios" width="640" height="1136" />
-  
-  
+ 
 </widget>
