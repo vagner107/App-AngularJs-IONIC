@@ -6,12 +6,8 @@
 */
 angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.deploy', 'starter.controllers', 'starter.welcomeController'])
 
-.run(function($ionicPlatform, $cordovaSplashscreen) {
+.run(function($ionicPlatform) {
 
-	setTimeout(function() {
-    $cordovaSplashscreen.hide()
-  }, 5000)
-  		
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)

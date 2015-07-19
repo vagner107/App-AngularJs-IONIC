@@ -11,9 +11,7 @@
   
   <icon src="resources/icons/icon.png" />
   
-	<preference name="SplashScreen" value="screen"/>  
-	<preference name="SplashScreenDelay" value="3000"/>
-   
+
   <access origin="*"/>
   <preference name="orientation" value="portrait" />  <!-- Tipo de tela-->
   <preference name="fullscreen" value="false" />      
@@ -26,4 +24,15 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
+  
+	
+	<gap:plugin name="org.apache.cordova.splashscreen"  />
+	<feature name="SplashScreen">
+		<param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+		<param name="ios-package" value="CDVSplashScreen" />
+	</feature>
+	<gap:splash src="resources/splash/splash.png" />
+	<gap:splash src="resources/splash/splash.png" gap:platform="ios" width="640" height="1136" />
+  
+  
 </widget>
