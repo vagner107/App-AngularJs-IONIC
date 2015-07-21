@@ -8,15 +8,27 @@ var serviceApp =  angular.module('starter.welcomeController', ['ionic']);
 serviceApp.service('statesService', function($http, $timeout) {
 
 	datas = {};
+	var status_id;
 	this.setData = function(){ 
 		
-			$http.get('http://app.rjag.com.br/app-IOS/login.json')
-			.then(function(res){
-				datas = res.data;
-			});
-	  };
+			$http.get('http://app.rjag.com.br/app-IOS/login.json')			
+			 .success(function(data, status, headers, config) {
+				 datas = data;
+				 status_id = status;
+			  })
+			  .error(function(data, status, headers, config) {
+				 datas = data;
+				 status_id = status;
+			  });
+		  };
 	this.getData = function() {
 		return datas;
+		
+	};
+	
+	this.getStatus = function() { // status de conexao, > 0 ok < 0 sem internet
+		return status_id;
+		
 	};
 });
 
@@ -68,10 +80,25 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 				type: 'button-energized'}]
 		});
 		alertPopup.then(function(res) {
-			console.log('Obrigado por acessar');
+			console.log('Email ou Login incorretos');
 		});
 	};
    	
+		//ALERTA sem CONEXÃO com Internet
+	$scope.showAlertConnection = function() {
+		var alertPopup = $ionicPopup.alert({
+			title: 'Sem Conexão a Internet',
+			template: 'Tente Novamente',
+			delay : '4000',
+			buttons: [
+				{text: '<b>Ok</b>',
+				type: 'button-energized'}]
+		});
+		alertPopup.then(function(res) {
+			console.log('Sem Conexão a Internet');
+		});
+	};
+	
 	// Objeto criado para recuperação do login
 	$scope.loginData = {};
 		
@@ -115,7 +142,11 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 				$state.go('app.vouchers');
 				
 			}else{
-				$scope.showAlert();
+				if(statesService.getStatus() == 0){
+					$scope.showAlertConnection();
+				}else{
+					$scope.showAlert();
+				}
 			}
 		}, 5000);
 	};
