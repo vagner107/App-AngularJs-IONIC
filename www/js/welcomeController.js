@@ -9,19 +9,28 @@ serviceApp.service('statesService', function($http, $timeout) {
 
 	datas = {};
 	var status_id;
+	
 	this.setData = function(){ 
 		
-			$http.get('http://app.rjag.com.br/app-IOS/login.json')			
-			 .success(function(data, status, headers, config) {
-				 datas = data;
-				 status_id = status;
-			  })
-			  .error(function(data, status, headers, config) {
-				 datas = data;
-				 status_id = status;
-			  });
-		  };
+		$http.get('http://app.rjag.com.br/app-IOS/login.json')			
+		 .success(function(data, status, headers, config) {
+			 datas = data;
+			 status_id = status;
+		  })
+		  .error(function(data, status, headers, config) {
+			 datas = data;
+			 status_id = status;
+		  });
+	};
+	
+	this.deletDatas = function() {
+		datas = {};
+		console.dir(datas);
+		console.log(datas);
+	};
+			  
 	this.getData = function() {
+		console.dir(datas);
 		return datas;
 		
 	};
@@ -30,6 +39,7 @@ serviceApp.service('statesService', function($http, $timeout) {
 		return status_id;
 		
 	};
+	
 });
 
 /*
@@ -45,6 +55,16 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 
 //********************************************* LOGIN  ***********************************************// 
 
+	
+	
+	$scope.logout = function() {
+		$scope.show();	
+		$timeout(function() {
+			statesService.deletDatas();
+			$state.go('welcome');
+		}, 3000);
+	};
+	
 	// LOADING TIMER 3000 Ms
 	$scope.show = function() {
 		$ionicLoading.show({
@@ -84,7 +104,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 		});
 	};
    	
-		//ALERTA sem CONEXÃO com Internet
+		//ALERTA LOGIN
 	$scope.showAlertConnection = function() {
 		var alertPopup = $ionicPopup.alert({
 			title: 'Sem Conexão a Internet',
@@ -150,11 +170,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 			}
 		}, 5000);
 	};
-
-	$scope.logout = function() {
-		$state.go('welcome');
-	};
-  
+ 
   
 //********************************************* CADASTRO  ***********************************************// 
  	
@@ -347,18 +363,28 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
  	
 	// objeto para armazenamento dos dados capturados do json
  	esqueci = {};
-	
+	var status_esqueci;
 	// Metodo criado para obter valores do jSon
 	$scope.setEsqueci = function(){  
 			$http.get('http://app.rjag.com.br/app-IOS/esqueci_response.json')
-			.then(function(res){
-				esqueci = res.data;
-			});
+			.success(function(data, status, headers, config) {
+				 esqueci = data;
+				 status_esqueci = status;
+			  })
+			  .error(function(data, status, headers, config) {
+				 esqueci = data;
+				 status_esqueci = status;
+			  });
 	  };
 	
 	// metodo retorna o valor dos dados capturados  
 	$scope.getEsqueci = function() {
 		return esqueci;
+	};
+	
+	$scope.getStatusEsqueci = function() { // status de conexao, > 0 ok < 0 sem internet
+		return status_esqueci;
+		
 	};
 	
 	$scope.doSenha = function() {
@@ -382,10 +408,13 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 				},500);
 				
 			}else{
-				$scope.showAlertEmail();
+				if($scope.getStatusEsqueci() == 0){
+					$scope.showAlertConnection();
+				}else{
+					$scope.showAlertEmail();
+				}
 			}
 		}, 4000);
 	}; // fechamento $scope.doSenha
   
 });// fechando serviceApp.controller
-

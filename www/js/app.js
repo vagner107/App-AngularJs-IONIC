@@ -43,31 +43,11 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.deploy'
 	controller: 'WelcomeCtrl',
 	controllerAs: ''
 })
-
 .state('app', {
 	url: "/app",
-	abstract: true,
 	templateUrl: "templates/menu.html",
-	controller: 'AppCtrl'
-})
-
- 
-.state('app.search', {
-url: "/search",
-views: {
-  'menuContent': {
-	templateUrl: "templates/search.html"
-  }
-}
-})
-
-.state('browse', {
-url: "/browse",
-views: {
-  'menuContent': {
-	templateUrl: "templates/browse.html"
-  }
-}
+	controller: 'WelcomeCtrl',
+	controllerAs: ''
 })
 .state('app.vouchers', {
   url: "/vouchers",
@@ -78,7 +58,6 @@ views: {
 	}
   }
 })
-
 .state('app.single', {
 url: "/vouchers/:voucherId",
 views: {
