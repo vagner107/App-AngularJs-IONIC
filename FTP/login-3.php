@@ -4,7 +4,7 @@ include('connection.php');
 $email = $_GET['email'];;
 $senha = $_GET['senha'];
 
-$sql1 = "SELECT
+$sql = "SELECT
 			cliente.cod_cliente,
 			nome,
 			email,
@@ -20,13 +20,11 @@ $sql1 = "SELECT
 			cliente.email = '$email'
 			AND cliente.senha = '$senha'";
 
-$sql1 = mysql_query($sql1);
-$row1 = mysql_fetch_array($sql1);
-$name = $row1['nome'];
-$email1 = $row1['email'];
-
-if($name == '' && $email1 ==''){
-	$sql1 = "SELECT	nome,
+$sql1 = mysql_query($sql);
+$sql2 = mysql_query($sql);
+ 
+if(mysql_fetch_array($sql2) == ''){
+	$sql1 = "SELECT nome,
 			email
 			FROM cliente
 			WHERE email = '$email'
@@ -35,9 +33,11 @@ if($name == '' && $email1 ==''){
 }
 
 
-$response = array();
 
- while ($row = mysql_fetch_array($sql1)) {
+$response = array();
+$json = array();
+
+while ($row = mysql_fetch_array($sql1)) {
      $json["cod_cliente"] = $row[0];
      $json["nome"] = $row[1];
 	 $json["email"] = $row[2];
@@ -46,8 +46,6 @@ $response = array();
 	 $json["voucher_usado"] = $row[5];
      array_push($response, $json);  
 }
-
-$string = "minha string";
 $fp = fopen('login.json', 'w');
 fwrite($fp, json_encode($response));
 fclose($fp);

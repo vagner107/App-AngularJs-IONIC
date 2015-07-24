@@ -9,9 +9,27 @@ serviceApp.service('statesService', function($http, $timeout) {
 
 	datas = {};
 	var status_id;
+	var email;
+	var senha;
+	
+	this.setDadosLogin = function(email1,senha1){ 
+		email = email1;
+		senha = senha1;
+		console.log(email);
+		console.log(senha);		
+	};
+	
+	this.getRefresh = function(){ 
+		$http({
+			url: 'http://app.rjag.com.br/app-IOS/login-3.php', 
+			method: "POST",
+			params: {email:email, senha:senha}
+		});
+	};	
+	
 	
 	this.setData = function(){ 
-		
+		console.log(" chamada ao JSON Login");
 		$http.get('http://app.rjag.com.br/app-IOS/login.json')			
 		 .success(function(data, status, headers, config) {
 			 datas = data;
@@ -25,8 +43,6 @@ serviceApp.service('statesService', function($http, $timeout) {
 	
 	this.deletDatas = function() {
 		datas = {};
-		console.dir(datas);
-		console.log(datas);
 	};
 			  
 	this.getData = function() {
@@ -147,7 +163,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 		method: "POST",
 		params: {email: $scope.loginData.username, senha:$scope.loginData.password}
 		});
-
+		
 		//CAPTURADO DADOS DO JSON
 		$scope.show1(5000);
 		$timeout(function() {
@@ -160,7 +176,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 				$scope.closeLogin();
 				$scope.show1(1000);
 				$state.go('app.vouchers');
-				
+				statesService.setDadosLogin($scope.loginData.username,$scope.loginData.password);
 			}else{
 				if(statesService.getStatus() == 0){
 					$scope.showAlertConnection();

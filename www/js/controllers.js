@@ -19,14 +19,23 @@ angular.module('starter.controllers', ['ionic'])
 /***********************************************************************************
 * Controller : vouchersCtrl
 * $stateParams: Serviço utilizado para redirecionar parametros pela URL como um php
+* doRefresh: realiza o refresh dos vouchers, assim solicitando do banco
 ***********************************************************************************/
-.controller('vouchersCtrl', function($scope, $stateParams) {
-
-  $scope.vouchers = [
-    { title: 'Voucher Ativo', status: 'A'},
-    { title: 'Voucher Utilizado', status: 'U'},
-  ];
-})
+.controller('vouchersCtrl', function($scope, $stateParams, $timeout, statesService) {
+	
+	$scope.doRefresh = function() {
+		statesService.getRefresh();
+		$timeout(function() {
+			statesService.setData();
+			$scope.$broadcast('scroll.refreshComplete');	
+		},4000);
+	};
+	
+	$scope.vouchers = [
+		{ title: 'Voucher Ativo', status: 'A'},
+		{ title: 'Voucher Utilizado', status: 'U'},
+		];
+	})
 /***********************************************************************************
 * Controller : voucherCtrl
 * $stateParams: Serviço utilizado para redirecionar parametros pela URL como um php
@@ -48,7 +57,6 @@ angular.module('starter.controllers', ['ionic'])
 		params: {email: statesService.email, senha:statesService.senha, status:0}
 		});*/
 		
-		statesService.setData();
 		$scope.todos = statesService.getData();
 		
 		
@@ -65,7 +73,6 @@ angular.module('starter.controllers', ['ionic'])
 			
 		};	
 	
-		statesService.setData();
 		$scope.todos = statesService.getData();
 	
 	}
