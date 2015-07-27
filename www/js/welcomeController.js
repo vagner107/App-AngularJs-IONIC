@@ -12,6 +12,7 @@ serviceApp.service('statesService', function($http, $timeout) {
 	var email;
 	var senha;
 	
+	 // seta os dados do login e duas ariaveis privadas
 	this.setDadosLogin = function(email1,senha1){ 
 		email = email1;
 		senha = senha1;
@@ -19,6 +20,7 @@ serviceApp.service('statesService', function($http, $timeout) {
 		console.log(senha);		
 	};
 	
+	// Refresh chama esse metodo para gerar novamente o JSON e assim alimentar o app com dados atuais
 	this.getRefresh = function(){ 
 		$http({
 			url: 'http://app.rjag.com.br/app-IOS/login-3.php', 
@@ -27,7 +29,7 @@ serviceApp.service('statesService', function($http, $timeout) {
 		});
 	};	
 	
-	
+	// Metodo que alimenta a variaveis com o JSON gerado na hora do login ou Refresh
 	this.setData = function(){ 
 		console.log(" chamada ao JSON Login");
 		$http.get('http://app.rjag.com.br/app-IOS/login.json')			
@@ -41,16 +43,19 @@ serviceApp.service('statesService', function($http, $timeout) {
 		  });
 	};
 	
+	// Metodo que apaga o meto datas, pois assim nao armazena no cash e nao loga com login incorreto
 	this.deletDatas = function() {
 		datas = {};
 	};
-			  
+	
+	// retorna o valor do objeto datas		  
 	this.getData = function() {
 		console.dir(datas);
 		return datas;
 		
 	};
 	
+	//retorna o status de conexão, sendo 1: CONEXÃO ATIVA 2: CONEXÃO INATIVA 
 	this.getStatus = function() { // status de conexao, > 0 ok < 0 sem internet
 		return status_id;
 		

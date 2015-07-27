@@ -23,6 +23,7 @@ angular.module('starter.controllers', ['ionic'])
 ***********************************************************************************/
 .controller('vouchersCtrl', function($scope, $stateParams, $timeout, statesService) {
 	
+	// responsavel por ordenar o refresh
 	$scope.doRefresh = function() {
 		statesService.getRefresh();
 		$timeout(function() {
