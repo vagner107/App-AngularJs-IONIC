@@ -4,26 +4,9 @@
 *include module : starter.controllers
 * include module : starter.welcomeController
 */
-angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.deploy', 'starter.controllers', 'starter.welcomeController'])
+var app = angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.deploy', 'starter.controllers', 'starter.welcomeController'])
 
-.run(function($ionicPlatform) {
-
- $ionicPlatform.ready(function() {
-	
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-	  
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
-
-.config(['$ionicAppProvider', function($ionicAppProvider) {
+app.config(['$ionicAppProvider', function($ionicAppProvider) {
   // Identify app
   $ionicAppProvider.identify({
     // The App ID (from apps.ionic.io) for the server
@@ -33,19 +16,19 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.deploy'
   });
 }])
 
-.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
 
-.state('welcome', {
-	url: "/welcome",
-	templateUrl: "templates/welcome.html",
-	controller: 'WelcomeCtrl',
-	controllerAs: ''
-})
 .state('app', {
 	url: "/app",
 	templateUrl: "templates/menu.html",
+	controller: 'WelcomeCtrl',
+	controllerAs: ''
+})
+.state('welcome', {
+	url: "/welcome",
+	templateUrl: "templates/welcome.html",
 	controller: 'WelcomeCtrl',
 	controllerAs: ''
 })
@@ -68,5 +51,29 @@ views: {
 }
 });
   //default caso contrario use a rota X
-  $urlRouterProvider.otherwise('/welcome');
+  $urlRouterProvider.otherwise('/app/vouchers');
+})
+
+app.run(function($ionicPlatform, $rootScope, $location, sessionService, $state) {
+
+	if(sessionService.islogged('username') == false){
+		$location.path('/welcome');
+		console.log("nao logado");
+	}
+	
+ $ionicPlatform.ready(function() {
+	// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+	  
+    }
+    if (window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
+    }
+  });
+  
+  	
+  
 });

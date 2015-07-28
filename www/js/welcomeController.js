@@ -5,6 +5,28 @@ var serviceApp =  angular.module('starter.welcomeController', ['ionic']);
 * $timeout :  Serviço com metodos com temporizadores
 * $http : Serviços para estabelecer acesso http.
 */
+
+serviceApp.service('sessionService', function($http) {
+
+		this.set = function(key,value){
+			return sessionStorage.setItem(key,value);
+		};
+		this.get = function(key){
+			return sessionStorage.getItem(key);
+		};
+		this.destroy = function(key){
+			return sessionStorage.removeItem(key);
+		};
+		this.islogged = function(key){
+			if(sessionStorage.getItem(key) > ''){ 
+				return true;
+			}else{
+				return false;
+			}
+		};
+
+});
+
 serviceApp.service('statesService', function($http, $timeout) {
 
 	datas = {};
@@ -72,7 +94,7 @@ serviceApp.service('statesService', function($http, $timeout) {
 * $ionicPopup : Serviço Popup IONIC (Alertas e Notificações)
 * $http : Serviços para estabelecer acesso http.
 */
-serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup, $http, statesService) {
+serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup, $http, statesService, sessionService) {
 
 //********************************************* LOGIN  ***********************************************// 
 
@@ -80,6 +102,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 	
 	$scope.logout = function() {
 		$scope.show();	
+		sessionService.destroy('username');
 		$timeout(function() {
 			statesService.deletDatas();
 			$state.go('welcome');
@@ -177,7 +200,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 		
 		$timeout(function() {
 			if(statesService.getData() > ''){	
-				
+				sessionService.set('username',$scope.loginData.username);
 				$scope.closeLogin();
 				$scope.show1(1000);
 				$state.go('app.vouchers');
