@@ -51,14 +51,14 @@ views: {
 }
 });
   //default caso contrario use a rota X
-  $urlRouterProvider.otherwise('/app/vouchers');
+  $urlRouterProvider.otherwise('/welcome');
 })
 
 app.run(function($ionicPlatform, $rootScope, $location, $state, cookieAcces) {
 	
-	if(cookieAcces.get() == false){
-		$location.path('/welcome');
-		console.log("NAO LOGADO...");
+	if(cookieAcces.get()){
+		$location.path('/app/vouchers');
+		console.log("LOGADO...");
 	}
 	
  $ionicPlatform.ready(function() {
