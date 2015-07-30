@@ -54,11 +54,11 @@ views: {
   $urlRouterProvider.otherwise('/app/vouchers');
 })
 
-app.run(function($ionicPlatform, $rootScope, $location, sessionService, $state) {
-
-	if(sessionService.islogged('username') == false){
+app.run(function($ionicPlatform, $rootScope, $location, $state, cookieAcces) {
+	
+	if(cookieAcces.get() == false){
 		$location.path('/welcome');
-		console.log("nao logado");
+		console.log("NAO LOGADO...");
 	}
 	
  $ionicPlatform.ready(function() {

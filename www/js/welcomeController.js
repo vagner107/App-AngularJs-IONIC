@@ -1,12 +1,44 @@
-var serviceApp =  angular.module('starter.welcomeController', ['ionic']);
+var serviceApp =  angular.module('starter.welcomeController', ['ionic','ngCookies']);
 
-/*
-* Service : statesService
-* $timeout :  Serviço com metodos com temporizadores
+
+
+/***********************************************************************************
+* Service : sessionService
+* $timeout :  Serviço criar session
 * $http : Serviços para estabelecer acesso http.
-*/
+***********************************************************************************/
 
-serviceApp.service('sessionService', function($http) {
+serviceApp.service('cookieAcces', function($cookies) {
+
+		this.set = function(value){
+			// Criando
+			 var favoriteCookie = $cookies.username;
+			 // Setting o cookie
+			 $cookies.username = value;
+		};
+		this.remove = function(){
+			$cookies.username = '';
+		};
+		this.get = function(){
+			if ($cookies.username > ''){
+				console.log('existente');
+				return true;
+			}else{
+				console.log('nao existente');
+				return false;
+			}
+		};
+ 
+});
+
+
+/***********************************************************************************
+* Service : sessionService
+* $timeout :  Serviço criar session
+* $http : Serviços para estabelecer acesso http.
+***********************************************************************************/
+
+/*serviceApp.service('sessionService', function($http) {
 
 		this.set = function(key,value){
 			return sessionStorage.setItem(key,value);
@@ -25,7 +57,15 @@ serviceApp.service('sessionService', function($http) {
 			}
 		};
 
-});
+});*/
+
+
+/***********************************************************************************
+* Service : statesService
+* $timeout :  Serviço com metodos com temporizadores
+* $http : Serviços para estabelecer acesso http.
+***********************************************************************************/
+
 
 serviceApp.service('statesService', function($http, $timeout) {
 
@@ -85,7 +125,7 @@ serviceApp.service('statesService', function($http, $timeout) {
 	
 });
 
-/*
+/***********************************************************************************
 * Controller : WelcomeCtrl
 * $ionicModal: Serviço para abilitar modal IONIC, exemplo : Login , Cadastro, Esqueci minha senha
 * $timeout :  Serviço com metodos com temporizadores
@@ -93,16 +133,17 @@ serviceApp.service('statesService', function($http, $timeout) {
 * $ionicLoading : Serviço loading IONIC
 * $ionicPopup : Serviço Popup IONIC (Alertas e Notificações)
 * $http : Serviços para estabelecer acesso http.
-*/
-serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup, $http, statesService, sessionService) {
+***********************************************************************************/
+serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup, $http, statesService, cookieAcces) {
 
 //********************************************* LOGIN  ***********************************************// 
 
-	
+
 	
 	$scope.logout = function() {
 		$scope.show();	
-		sessionService.destroy('username');
+		cookieAcces.remove();
+		cookieAcces.get();
 		$timeout(function() {
 			statesService.deletDatas();
 			$state.go('welcome');
@@ -200,7 +241,8 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 		
 		$timeout(function() {
 			if(statesService.getData() > ''){	
-				sessionService.set('username',$scope.loginData.username);
+				cookieAcces.set($scope.loginData.username);
+				cookieAcces.get();
 				$scope.closeLogin();
 				$scope.show1(1000);
 				$state.go('app.vouchers');
