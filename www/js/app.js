@@ -54,12 +54,12 @@ views: {
   $urlRouterProvider.otherwise('/welcome');
 })
 
-app.run(function($ionicPlatform, $rootScope, $location, $state, cookieAcces) {
-	
-	if(cookieAcces.get()){
+app.run(function($ionicPlatform, $rootScope, $location, $state) {
+	/*cookieAcces*/
+/*	if(cookieAcces.get()){
 		$location.path('/app/vouchers');
 		console.log("LOGADO...");
-	}
+	}*/
 	
  $ionicPlatform.ready(function() {
 	// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
