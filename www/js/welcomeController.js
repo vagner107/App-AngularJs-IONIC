@@ -1,6 +1,6 @@
-var serviceApp =  angular.module('starter.welcomeController', ['ionic']);
+var serviceApp =  angular.module('starter.welcomeController', ['ionic','ngCookies']);
 
-/*'ngCookies'*/
+
 
 /***********************************************************************************
 * Service : sessionService
@@ -8,7 +8,7 @@ var serviceApp =  angular.module('starter.welcomeController', ['ionic']);
 * $http : Serviços para estabelecer acesso http.
 ***********************************************************************************/
 
-/*serviceApp.service('cookieAcces', function($cookies) {
+serviceApp.service('cookieAcces', function($cookies) {
 
 		this.set = function(value){
 			// Criando
@@ -29,7 +29,7 @@ var serviceApp =  angular.module('starter.welcomeController', ['ionic']);
 			}
 		};
  
-});*/
+});
 
 
 /***********************************************************************************
@@ -134,7 +134,7 @@ serviceApp.service('statesService', function($http, $timeout) {
 * $ionicPopup : Serviço Popup IONIC (Alertas e Notificações)
 * $http : Serviços para estabelecer acesso http.
 ***********************************************************************************/
-serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup, $http, statesService) {
+serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup, $http, statesService, cookieAcces) {
 
 //********************************************* LOGIN  ***********************************************// 
 
@@ -142,7 +142,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 	
 	$scope.logout = function() {
 		$scope.show();	
-	/*	cookieAcces.remove();*/
+		cookieAcces.remove();
 		cookieAcces.get();
 		$timeout(function() {
 			statesService.deletDatas();
@@ -241,8 +241,8 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 		
 		$timeout(function() {
 			if(statesService.getData() > ''){	
-	/*			cookieAcces.set($scope.loginData.username);
-				cookieAcces.get();*/
+				cookieAcces.set($scope.loginData.username);
+				cookieAcces.get();
 				$scope.closeLogin();
 				$scope.show1(1000);
 				$state.go('app.vouchers');
