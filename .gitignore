@@ -3,4 +3,8 @@
 
 node_modules/
 platforms/
-
+plugins/com.ionic.deploy
+plugins/com.ionic.keyboard
+plugins/org.apache.cordova.console
+plugins/org.apache.cordova.device
+plugins/org.apache.cordova.splashscreen
