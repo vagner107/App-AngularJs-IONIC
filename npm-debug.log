@@ -2,7 +2,7 @@
 1 verbose cli [ 'node',
 1 verbose cli   'C:\\Users\\vagner\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
 1 verbose cli   'install',
-1 verbose cli   'angular-cookies' ]
+1 verbose cli   'ngkookies' ]
 2 info using npm@2.13.2
 3 info using node@v0.12.7
 4 verbose install initial load of C:\wamp\www\App-IOS\package.json
@@ -19,7 +19,7 @@
 5 verbose stack     at C:\Users\vagner\AppData\Roaming\npm\node_modules\npm\node_modules\read-package-json\node_modules\graceful-fs\graceful-fs.js:102:5
 6 verbose cwd C:\wamp\www\App-IOS
 7 error Windows_NT 6.3.9600
-8 error argv "node" "C:\\Users\\vagner\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "install" "angular-cookies"
+8 error argv "node" "C:\\Users\\vagner\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "install" "ngkookies"
 9 error node v0.12.7
 10 error npm  v2.13.2
 11 error Invalid name: "Double Let's Eat"

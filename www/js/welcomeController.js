@@ -9,14 +9,27 @@ var serviceApp =  angular.module('starter.welcomeController', ['ionic','ngCookie
 ***********************************************************************************/
 
 serviceApp.service('cookieAcces', function($cookieStore, $window, $cookieStore) {
+	
 		
-		this.set = function(value){
-				
-			var dt = new Date();
-			dt.setMinutes(dt.getMinutes() + 30);                           
+		
+		this.set = function(name,value,days){
 			
-			$cookieStore.put("myFavorite", value, { expires: dt })
-
+			var expires = "";
+			if (days) {
+				var date = new Date();
+				date.setTime( date.getTime() + ( days * 24 * 60 * 60 * 1000 ) );
+				expires = "; expires=" + date.toGMTString();
+			}
+			document.cookie = name + "=" + value + expires + "; path=/";
+			
+			/*var expireDate = new Date();
+			expireDate.setSeconds((expireDate.getSeconds()+day*24*60*60*1000))	;
+			document.cookie = "Name=" + name + ";path=/;expires=" + expireDate.toGMTString();	*/	
+			/*$cookieStore.put('myFavorite',value, {expires: 7});*/
+	
+                          
+			
+				
 			/*$window.sessionStorage.token = value;*/
 			/*$cookieStore.put('myFavorite',value);*/
 			// Get cookie
@@ -25,25 +38,35 @@ serviceApp.service('cookieAcces', function($cookieStore, $window, $cookieStore) 
 			
   
 			/*var favoriteCookie = $cookies.username;*/
-			/*$cookies.username = value;*/
-			/*document.cookie = "username=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/App-IOS/www	";*/
+			/*$cookies.username = value;
+			document.cookie = "username="+value+"; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/App-IOS/www	";*/
 		};
-		this.remove = function(){
-			$cookieStore.remove('myFavorite');
+		this.remove = function(name){
+			this.set( name, "", -1 );
+			/*$cookieStore.remove('myFavorite');*/
 			/*delete $window.sessionStorage.token;*/
-			/*$cookies.username = '';*/
+			/*document.cookie = 'myFavorite=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';*/
 			/*$cookieStore.remove('myFavorite');*/
 		};
-		this.get = function(){
-			var favoriteCookie = $cookieStore.get('myFavorite');
-			/*var token = $window.sessionStorage.token;*/
-			if (favoriteCookie > ''){
+		this.get = function(name){
+			var nameEQ = name + "=";
+			var ca = document.cookie.split( ';' );
+			for ( var i = 0; i < ca.length; i++ ) {
+				var c = ca[ i ];
+				while ( c.charAt(0) == ' ' ) c = c.substring( 1, c.length );
+				if ( c.indexOf( nameEQ ) == 0 ) return c.substring( nameEQ.length, c.length );
+			}
+			return null;
+			/*var favoriteCookie = $cookieStore.get('myFavorite');
+			var x = document.cookie;
+			/*var token = $window.sessionStorage.token;
+			if (x > ''){
 				console.log('existente');
 				return true;
 			}else{
 				console.log('nao existente');
 				return false;
-			}
+			}*/
 		};
  
 });
@@ -159,8 +182,8 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 	
 	$scope.logout = function() {
 		$scope.show();	
-		cookieAcces.remove();
-		cookieAcces.get();
+		cookieAcces.remove('username');
+		cookieAcces.get('username');
 		$timeout(function() {
 			statesService.deletDatas();
 			$state.go('welcome');
@@ -258,8 +281,8 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 		
 		$timeout(function() {
 			if(statesService.getData() > ''){	
-				cookieAcces.set($scope.loginData.username);
-				cookieAcces.get();
+				cookieAcces.set('username',$scope.loginData.username,10);
+				cookieAcces.get('username');
 				$scope.closeLogin();
 				$scope.show1(1000);
 				$state.go('app.vouchers');

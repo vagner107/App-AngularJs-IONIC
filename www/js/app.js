@@ -56,7 +56,7 @@ views: {
 
 app.run(function($ionicPlatform, $rootScope, $location, $state, cookieAcces) {
 	
-	if(cookieAcces.get()){
+	if(cookieAcces.get('username')){
 		$location.path('/app/vouchers');
 		console.log("LOGADO...");
 	}
