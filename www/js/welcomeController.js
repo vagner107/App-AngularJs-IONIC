@@ -1,4 +1,4 @@
-var serviceApp =  angular.module('starter.welcomeController', ['ionic','ngCookies']);
+var serviceApp =  angular.module('starter.welcomeController', ['ionic','ngCookies','ngKookies']);
 
 
 
@@ -8,65 +8,35 @@ var serviceApp =  angular.module('starter.welcomeController', ['ionic','ngCookie
 * $http : Serviços para estabelecer acesso http.
 ***********************************************************************************/
 
-serviceApp.service('cookieAcces', function($cookieStore, $window, $cookieStore) {
+serviceApp.service('cookieAcces', function($cookieStore,$cookies,$cookieStore,$window, $kookies) {
 	
 		
 		
 		this.set = function(name,value,days){
-			
-			var expires = "";
-			if (days) {
-				var date = new Date();
-				date.setTime( date.getTime() + ( days * 24 * 60 * 60 * 1000 ) );
-				expires = "; expires=" + date.toGMTString();
-			}
-			document.cookie = name + "=" + value + expires + "; path=/App-IOS/www";
-			
-			/*var expireDate = new Date();
-			expireDate.setSeconds((expireDate.getSeconds()+day*24*60*60*1000))	;
-			document.cookie = "Name=" + name + ";path=/;expires=" + expireDate.toGMTString();	*/	
-			$cookieStore.put('myFavorite',value, {expires: 7});
-	
-                          
-			
 				
-			/*$window.sessionStorage.token = value;*/
-			/*$cookieStore.put('myFavorite',value);*/
-			// Get cookie
+			var now = new Date();  
 			
-			// Removing a cookie
-			
-  
-			/*var favoriteCookie = $cookies.username;*/
-			/*$cookies.username = value;
-			document.cookie = "username="+value+"; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/App-IOS/www	";*/
+			/* $kookies.set(name, value);
+ 
+			// 2. create expiring cookie 
+			$kookies.set(name, value, {expires: 7});*/
+		 
+			// 3. Create expiring cookie, valid across entire site 
+			$kookies.set(name, value, {expires: 7, path: '/'});
+
 		};
 		this.remove = function(name){
-			this.set(name, "", -1 );
-			/*$cookieStore.remove('myFavorite');*/
-			/*delete $window.sessionStorage.token;*/
-			/*document.cookie = 'myFavorite=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';*/
-			/*$cookieStore.remove('myFavorite');*/
+			$kookies.remove(name); 
 		};
 		this.get = function(name){
-			var nameEQ = name + "=";
-			var ca = document.cookie.split( ';' );
-			for ( var i = 0; i < ca.length; i++ ) {
-				var c = ca[ i ];
-				while ( c.charAt(0) == ' ' ) c = c.substring( 1, c.length );
-				if ( c.indexOf( nameEQ ) == 0 ) return c.substring( nameEQ.length, c.length );
-			}
-			return null;
-			/*var favoriteCookie = $cookieStore.get('myFavorite');
-			var x = document.cookie;
-			/*var token = $window.sessionStorage.token;
-			if (x > ''){
+
+			if ($kookies.get(name) > ''){
 				console.log('existente');
 				return true;
 			}else{
 				console.log('nao existente');
 				return false;
-			}*/
+			}
 		};
  
 });
