@@ -8,19 +8,28 @@ var serviceApp =  angular.module('starter.welcomeController', ['ionic','ngCookie
 * $http : Serviços para estabelecer acesso http.
 ***********************************************************************************/
 
-serviceApp.service('cookieAcces', function($cookies) {
+serviceApp.service('cookieAcces', function($cookieStore) {
 		
 		this.set = function(value){
 			
+			// Put cookie
+			$cookieStore.put('myFavorite',value);
+			// Get cookie
+			
+			// Removing a cookie
+			
+  
 			/*var favoriteCookie = $cookies.username;*/
 			/*$cookies.username = value;*/
-			document.cookie = "username=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/App-IOS/www	";
+			/*document.cookie = "username=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/App-IOS/www	";*/
 		};
 		this.remove = function(){
-			$cookies.username = '';
+			/*$cookies.username = '';*/
+			$cookieStore.remove('myFavorite');
 		};
 		this.get = function(){
-			if ($cookies.username > ''){
+			var favoriteCookie = $cookieStore.get('myFavorite');
+			if (favoriteCookie > ''){
 				console.log('existente');
 				return true;
 			}else{
