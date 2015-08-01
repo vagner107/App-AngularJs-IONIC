@@ -20,12 +20,12 @@ serviceApp.service('cookieAcces', function($cookieStore, $window, $cookieStore) 
 				date.setTime( date.getTime() + ( days * 24 * 60 * 60 * 1000 ) );
 				expires = "; expires=" + date.toGMTString();
 			}
-			document.cookie = name + "=" + value + expires + "; path=/";
+			document.cookie = name + "=" + value + expires + "; path=/App-IOS/www";
 			
 			/*var expireDate = new Date();
 			expireDate.setSeconds((expireDate.getSeconds()+day*24*60*60*1000))	;
 			document.cookie = "Name=" + name + ";path=/;expires=" + expireDate.toGMTString();	*/	
-			/*$cookieStore.put('myFavorite',value, {expires: 7});*/
+			$cookieStore.put('myFavorite',value, {expires: 7});
 	
                           
 			
@@ -42,7 +42,7 @@ serviceApp.service('cookieAcces', function($cookieStore, $window, $cookieStore) 
 			document.cookie = "username="+value+"; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/App-IOS/www	";*/
 		};
 		this.remove = function(name){
-			this.set( name, "", -1 );
+			this.set(name, "", -1 );
 			/*$cookieStore.remove('myFavorite');*/
 			/*delete $window.sessionStorage.token;*/
 			/*document.cookie = 'myFavorite=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';*/
@@ -179,6 +179,8 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 //********************************************* LOGIN  ***********************************************// 
 
 
+	console.log("cookieAcces:"+cookieAcces.get('username'));
+	console.dir("cookieAcces:"+cookieAcces.get('username'));
 	
 	$scope.logout = function() {
 		$scope.show();	
