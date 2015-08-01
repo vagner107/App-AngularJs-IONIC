@@ -11,8 +11,12 @@ var serviceApp =  angular.module('starter.welcomeController', ['ionic','ngCookie
 serviceApp.service('cookieAcces', function($cookieStore, $window, $cookieStore) {
 		
 		this.set = function(value){
+				
+			var dt = new Date();
+			dt.setMinutes(dt.getMinutes() + 30);                           
 			
-			$cookieStore.put('myFavorite',value);	
+			$cookieStore.put("myFavorite", value, { expires: dt })
+
 			/*$window.sessionStorage.token = value;*/
 			/*$cookieStore.put('myFavorite',value);*/
 			// Get cookie
