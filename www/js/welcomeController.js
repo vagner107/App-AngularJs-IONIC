@@ -1,6 +1,5 @@
-var serviceApp =  angular.module('starter.welcomeController', ['ionic','ngCookies','ngKookies']);
-
-
+var serviceApp =  angular.module('starter.welcomeController', ['ionic','ngKookies']);
+/*,'ngCookies'*/
 
 /***********************************************************************************
 * Service : sessionService
@@ -8,13 +7,14 @@ var serviceApp =  angular.module('starter.welcomeController', ['ionic','ngCookie
 * $http : Serviços para estabelecer acesso http.
 ***********************************************************************************/
 
-serviceApp.service('cookieAcces', function($cookieStore,$cookies,$cookieStore,$window, $kookies) {
+serviceApp.service('cookieAcces', function($kookies) {
 	
 		
-		
+		/*$cookieStore,$cookies,$cookieStore,$window, */
 		this.set = function(name,value,days){
 				
-			var now = new Date();  
+			/*var now = new Date(); */ 
+			 // this will set the expiration to 12 months     exp = new Date(now.getFullYear()+1, now.getMonth(), now.getDate());	
 			
 			/* $kookies.set(name, value);
  
@@ -22,13 +22,56 @@ serviceApp.service('cookieAcces', function($cookieStore,$cookies,$cookieStore,$w
 			$kookies.set(name, value, {expires: 7});*/
 		 
 			// 3. Create expiring cookie, valid across entire site 
-			$kookies.set(name, value, {expires: 7, path: '/'});
-
+			$kookies.set(name, value, {expires: 7, path: '/App-IOS/www'});
+			/*$cookieStore.put('fruit','Apple');	*/
+			/*$cookies.name = value;
+			platformCookie = $cookies.name;
+			
+			$cookieStore.put('flower','Rose');
+		
+			$cookieStore.put('someToken','blabla',{ 'expires': now });*/
+			 
+			/*var expires = "";
+			if (days) {
+				var date = new Date();
+				date.setTime( date.getTime() + ( days * 24 * 60 * 60 * 1000 ) );
+				expires = "{expires:" + date.toGMTString()+"}";
+			}
+			*/
+			
+			
+			/*
+			document.cookie = name + "=" + value + expires + "; path=/App-IOS/www";*/
+			
+			/*var expireDate = new Date();
+			expireDate.setSeconds((expireDate.getSeconds()+day*24*60*60*1000))	;
+			document.cookie = "Name=" + name + ";path=/;expires=" + expireDate.toGMTString();	*/	
+			
+	
+                          
+			
+				
+			/*$window.sessionStorage.token = value;*/
+			/*$cookieStore.put('myFavorite',value);*/
+			// Get cookie
+			
+			// Removing a cookie
+			
+  
+			/*var favoriteCookie = $cookies.username;*/
+			/*$cookies.username = value;
+			document.cookie = "username="+value+"; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/App-IOS/www	";*/
 		};
 		this.remove = function(name){
+			/*this.set(name, "", -1 );*/
+			/*$cookieStore.remove('myFavorite');*/
+			/*delete $window.sessionStorage.token;*/
+			/*document.cookie = 'myFavorite=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';*/
 			$kookies.remove(name); 
 		};
 		this.get = function(name){
+
+			/*token= $cookieStore.get(name);*/
 
 			if ($kookies.get(name) > ''){
 				console.log('existente');
