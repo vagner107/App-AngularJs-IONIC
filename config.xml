@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.appios233816" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Double Let's Eat IOS</name>
-  <description>
-       Um projeto Cordova e Ionic Framework : Vagner Araújo.
+  <description>&#xD;
+       Um projeto Cordova e Ionic Framework : Vagner Araújo.&#xD;
     </description>
-  <author email="vagnerarau@gmail.com" href="">
-      Vagner Araújo
+  <author email="vagnerarau@gmail.com" href="">&#xD;
+      Vagner Araújo&#xD;
     </author>
-  <content src="index.html"/>
-  
+  <content src="http://192.168.25.210:8100" original-src="index.html"/>
   <access origin="*"/>
   <preference name="orientation" value="portrait"/>
   <preference name="fullscreen" value="false"/>
@@ -19,14 +18,11 @@
   <preference name="BackupWebStorage" value="none"/>
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
-  
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
-  
   <icon src="resources/android/icon/icon.png"/>
   <splash src="resources/android/splash/splash.png"/>
-  
   <platform name="android">
     <icon src="resources/android/icon/drawable-ldpi-icon.png" density="ldpi"/>
     <icon src="resources/android/icon/drawable-mdpi-icon.png" density="mdpi"/>
@@ -35,7 +31,6 @@
     <splash src="resources/android/splash/drawable-port-mdpi-screen.png" density="port-mdpi"/>
     <splash src="resources/android/splash/drawable-port-hdpi-screen.png" density="port-hdpi"/>
   </platform>
-  
   <platform name="ios">
     <icon src="resources/ios/icon/icon.png" width="57" height="57"/>
     <icon src="resources/ios/icon/icon-40.png" width="40" height="40"/>
@@ -49,7 +44,4 @@
     <splash src="resources/ios/splash/Default@2x~iphone.png" width="640" height="960"/>
     <splash src="resources/ios/splash/Default~iphone.png" width="320" height="480"/>
   </platform>
-  
-  
-  
 </widget>

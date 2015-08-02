@@ -19,8 +19,21 @@
           <input class="password" type="password" ng-model="loginData.password" ng-minlenght="4" required>
         </label>
         <label class="item">
-          <button ng-disabled="loginForm.$invalid" class="button-block button button-energized" type="submit">Log in</button>
+          <button class="button button-bar-inline button-balanced" ng-click="register()">Register</button>
+          <button class="button button-bar-inline button-balanced" ng-click="unregister()">Unregister</button>
+          <p>Device Token</p>
+            <textarea readonly>{{regId}}</textarea>
+            <ion-list>
+                <ion-item ng-repeat="notification in notifications track by $index" type="item-content">
+                    {{notification}}
+                </ion-item>
+            </ion-list>  
         </label>
+        <label class="item">
+          <button ng-disabled="loginForm.$invalid"  class="button-block button button-energized" type="submit">Log in</button>
+        </label>
+        
+        
       </div>
     </form>
   </ion-content>

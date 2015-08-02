@@ -16,6 +16,12 @@
   },
   "cordovaPlugins": [
     "https://github.com/driftyco/ionic-plugins-deploy",
-    "org.apache.cordova.splashscreen"
-  ]
+    "org.apache.cordova.splashscreen",
+    "https://github.com/phonegap-build/PushPlugin.git",
+    {
+      "locator": "https://github.com/phonegap-build/PushPlugin.git",
+      "id": "com.phonegap.plugins.PushPlugin"
+    }
+  ],
+  "cordovaPlatforms": []
 }

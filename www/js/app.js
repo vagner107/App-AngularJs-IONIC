@@ -4,7 +4,7 @@
 *include module : starter.controllers
 * include module : starter.welcomeController
 */
-var app = angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.deploy', 'starter.controllers', 'starter.welcomeController'])
+var app = angular.module('starter', ['ionic', 'ionic.service.core', 'ngCordova', 'ionic.service.deploy', 'starter.controllers', 'starter.welcomeController'])
 
 app.config(['$ionicAppProvider', function($ionicAppProvider) {
   // Identify app
@@ -54,7 +54,7 @@ views: {
   $urlRouterProvider.otherwise('/welcome');
 })
 
-app.run(function($ionicPlatform, $rootScope, $location, $state, cookieAcces) {
+app.run(function($ionicPlatform, $rootScope, $location, $state, cookieAcces,$cordovaPush) {
 	
 	if(cookieAcces.get('username')){
 		$location.path('/app/vouchers');
