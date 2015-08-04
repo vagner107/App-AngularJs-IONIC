@@ -54,13 +54,8 @@ views: {
   $urlRouterProvider.otherwise('/welcome');
 })
 
-app.run(function($ionicPlatform, $rootScope, $location, $state, cookieAcces,$cordovaPush) {
-	
-	if(cookieAcces.get('username')){
-		$location.path('/app/vouchers');
-		console.log("LOGADO...");
-	}
-	
+app.run(function($ionicPlatform, $rootScope, $location, $state, $cordovaPush) {
+
  $ionicPlatform.ready(function() {
 	// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
