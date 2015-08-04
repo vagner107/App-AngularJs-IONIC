@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.appios233816" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Double Let's Eat IOS</name>
-  <description>&#xD;
-       Um projeto Cordova e Ionic Framework : Vagner Araújo.&#xD;
+  <description>
+       Um projeto Cordova e Ionic Framework : Vagner Araújo.
     </description>
-  <author email="vagnerarau@gmail.com" href="">&#xD;
-      Vagner Araújo&#xD;
+  <author email="vagnerarau@gmail.com" href="">
+      Vagner Araújo
     </author>
-  <content src="http://192.168.25.210:8100" original-src="index.html"/>
+ <!-- <content src="http://192.168.25.210:8100" original-src="index.html"/>-->
   <access origin="*"/>
   <preference name="orientation" value="portrait"/>
   <preference name="fullscreen" value="false"/>
