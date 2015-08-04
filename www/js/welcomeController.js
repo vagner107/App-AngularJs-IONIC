@@ -138,7 +138,7 @@ serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $st
 		});
 	};
    	
-		//ALERTA LOGIN
+	//ALERTA LOGIN
 	$scope.showAlertConnection = function() {
 		var alertPopup = $ionicPopup.alert({
 			title: 'Sem Conexão a Internet',
