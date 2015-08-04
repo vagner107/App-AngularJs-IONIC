@@ -7,7 +7,7 @@
   <author email="vagnerarau@gmail.com" href="">
       Vagner Araújo
     </author>
- <!-- <content src="http://192.168.25.210:8100" original-src="index.html"/>-->
+  <content original-src="index.html"/>
   <access origin="*"/>
   <preference name="orientation" value="portrait"/>
   <preference name="fullscreen" value="false"/>
