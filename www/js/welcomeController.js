@@ -86,6 +86,7 @@ app.factory(("ionPlatform"), function( $q ){
 * $ionicLoading : Serviço loading IONIC
 * $ionicPopup : Serviço Popup IONIC (Alertas e Notificações)
 * $http : Serviços para estabelecer acesso http.
+* statesService : servico
 ***********************************************************************************/
 serviceApp.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup, $http, statesService) {
 	
