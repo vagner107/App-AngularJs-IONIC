@@ -5,6 +5,7 @@ var serviceApp =  angular.module('starter.welcomeController', ['ionic']);
 * Service : statesService
 * $timeout :  Serviço com metodos com temporizadores
 * $http : Serviços para estabelecer acesso http.
+
 ***********************************************************************************/
 
 
