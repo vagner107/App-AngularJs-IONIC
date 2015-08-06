@@ -4,9 +4,38 @@
 *include module : starter.controllers
 * include module : starter.welcomeController
 */
-var app = angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.deploy', 'starter.controllers', 'starter.welcomeController'])
+var app = angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.deploy', 'starter.controllers', 'starter.welcomeController', 'ngMockE2E'])
 
-app.config(['$ionicAppProvider', function($ionicAppProvider) {
+.run(function($httpBackend){
+  $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
+})
+
+.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if(window.StatusBar) {
+      StatusBar.styleDefault();
+    }
+  });
+})
+
+
+.run(function($httpBackend){
+  $httpBackend.whenGET('http://localhost:8100/valid')
+        .respond({message: 'This is my valid response!'});
+  $httpBackend.whenGET('http://localhost:8100/notauthenticated')
+        .respond(401, {message: "Not Authenticated"});
+  $httpBackend.whenGET('http://localhost:8100/notauthorized')
+        .respond(403, {message: "Not Authorized"});
+ 
+  $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
+ })
+ 
+.config(['$ionicAppProvider', function($ionicAppProvider) {
   // Identify app
   $ionicAppProvider.identify({
     // The App ID (from apps.ionic.io) for the server
@@ -16,7 +45,7 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
   });
 }])
 
-app.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
 
@@ -51,10 +80,13 @@ views: {
 }
 });
   //default caso contrario use a rota X
-  $urlRouterProvider.otherwise('/welcome');
+  $urlRouterProvider.otherwise(function ($injector, $location) {
+    var $state = $injector.get("$state");
+    $state.go("app.vouchers");
+  });
 })
 
-app.run(function($ionicPlatform, $rootScope, $location, $state) {
+.run(function($ionicPlatform, $rootScope, $location, $state) {
 
  $ionicPlatform.ready(function() {
 	// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -71,4 +103,4 @@ app.run(function($ionicPlatform, $rootScope, $location, $state) {
   
   	
   
-});
+})
