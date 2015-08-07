@@ -1,9 +1,15 @@
 <?php
 include('connection.php');
 
-$email = $_GET['email'];;
-$senha = $_GET['senha'];
-
+if($_GET['token']){
+	$email = $_GET['email'];
+} else if($_GET['email'] > ''){
+	$email = $_GET['email'];
+	$senha = $_GET['senha'];
+}else{
+	$email = $_POST['email'];
+	$senha = $_POST['senha'];
+}
 $sql = "SELECT
 			cliente.cod_cliente,
 			nome,
@@ -17,9 +23,11 @@ $sql = "SELECT
 			INNER JOIN produto
 			ON voucher.cod_produto = produto.cod_produto
 			WHERE 
-			cliente.email = '$email'
-			AND cliente.senha = '$senha'";
+			cliente.email = '$email'";
 
+if($senha > ''){
+	$sql .= " AND cliente.senha = '$senha'";
+}
 $sql1 = mysql_query($sql);
 $sql2 = mysql_query($sql);
  

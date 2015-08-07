@@ -44,7 +44,7 @@ angular.module('starter')
   }
  
   var login = function(name, pw) {
-	  storeUserCredentials(name + '.yourServerToken');
+	  storeUserCredentials(name + '|yourServerToken');
   };
  
   var logout = function() {

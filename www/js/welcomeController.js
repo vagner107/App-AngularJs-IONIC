@@ -36,27 +36,32 @@ angular.module('starter')
 ***********************************************************************************/
 
 
-.service('statesService', function($http, $timeout) {
-
+.service('statesService', function($http, $timeout, AuthService) {
+	
 	datas = {};
 	var status_id;
 	var email;
 	var senha;
 	
 	 // seta os dados do login e duas ariaveis privadas
-	this.setDadosLogin = function(email1,senha1){ 
+/*	this.setDadosLogin = function(email1,senha1){ 
 		email = email1;
 		senha = senha1;
 		console.log(email);
 		console.log(senha);		
-	};
+	};*/
 	
 	// Refresh chama esse metodo para gerar novamente o JSON e assim alimentar o app com dados atuais
 	this.getRefresh = function(){ 
+		var token = window.localStorage.getItem('yourTokenKey');
+		console.log("TOKEN :" + token);
+
+		var res = token.split("|"); // criar array pela string separando as pelo '|'
+		
 		$http({
 			url: 'http://app.rjag.com.br/app-IOS/login-3.php', 
 			method: "POST",
-			params: {email:email, senha:senha}
+			params: {email:res[0], token:true}
 		});
 	};	
 	
@@ -206,7 +211,7 @@ angular.module('starter')
 				$scope.show1(1000);
 				$state.go('app.vouchers', {}, {reload: true});
 				$scope.setCurrentUsername(data.username);
-				statesService.setDadosLogin(data.username,data.password);
+				/*statesService.setDadosLogin(data.username,data.password);*/
 			}else{
 				if(statesService.getStatus() == 0){
 					$scope.showAlertConnection();
