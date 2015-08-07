@@ -96,9 +96,11 @@ angular.module('starter', ['ionic','ionic.service.core', 'ionic.service.deploy',
 })
 
 .run(function($timeout, statesService) {
-	
-	statesService.getRefresh();
-	$timeout(function() {
-		statesService.setData();
-	},1000);
+	var token = window.localStorage.getItem('yourTokenKey');
+	if(token > ''){
+		statesService.getRefresh();
+		$timeout(function() {
+			statesService.setData();
+		},1000);
+	}
 })
