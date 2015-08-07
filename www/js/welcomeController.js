@@ -6,6 +6,7 @@ angular.module('starter')
   $scope.username = AuthService.username();
  
   $scope.$on(AUTH_EVENTS.notAuthorized, function(event) {
+    $state.go('app.vouchers');
     var alertPopup = $ionicPopup.alert({
       title: 'Unauthorized!',
       template: 'You are not allowed to access this resource.'
@@ -105,9 +106,9 @@ angular.module('starter')
 * $http : Serviços para estabelecer acesso http.
 * statesService : servico
 ***********************************************************************************/
-.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup, $http, statesService, AuthService, AUTH_EVENTS) {
+.controller('WelcomeCtrl', function($scope, $ionicModal, $timeout, $state, $ionicLoading, $ionicPopup, $http, $httpBackend, statesService, AuthService, AUTH_EVENTS) {
 	
-	
+
 		// LOADING TIMER 3000 Ms
 	$scope.show = function() {
 		$ionicLoading.show({
@@ -182,20 +183,72 @@ angular.module('starter')
  //********************************************* LoginCtrl  ***********************************************// 
   $scope.data = {};
  
-  $scope.login = function(data) {
-    AuthService.login(data.username, data.password).then(function(authenticated) {
-		$scope.closeLogin();
-			$scope.show1(1000);	
-      $state.go('app.vouchers', {}, {reload: true});
-      $scope.setCurrentUsername(data.username);
-    }, function(err) {
-      var alertPopup = $ionicPopup.alert({
-        title: 'Login failed!',
-        template: 'Please check your credentials!'
-      });
-    });
+  
+ $scope.login = function(data) {
+			
+		$http({
+			url: 'http://app.rjag.com.br/app-IOS/login-3.php', 
+			method: "POST",
+			params: {email:data.username, senha: data.password}
+		});	
+		
+		//CAPTURADO DADOS DO JSON
+		$scope.show1(5000);
+		$timeout(function() {
+			statesService.setData();
+		}, 4000);
+		 
+		 
+		 $timeout(function() {
+			if(statesService.getData() > ''){
+				AuthService.login(data.username, data.password);	
+				$scope.closeLogin();
+				$scope.show1(1000);
+				$state.go('app.vouchers', {}, {reload: true});
+				$scope.setCurrentUsername(data.username);
+				statesService.setDadosLogin(data.username,data.password);
+			}else{
+				if(statesService.getStatus() == 0){
+					$scope.showAlertConnection();
+				}else{
+					$scope.showAlert();
+				}
+			}
+		}, 5000);
   };
   
+  
+  
+/*  $scope.login = function(data) {
+		//FAZ SOLICITAÇÃO PASSANDO DADOS VIA POST, QUE SEJA GERADO UM JSON  
+		$http({
+			url: 'http://app.rjag.com.br/app-IOS/login-3.php', 
+			method: "GET",
+			params: {email: data.username, senha:data.password}
+		});
+		
+		//CAPTURADO DADOS DO JSON
+		$scope.show1(5000);
+		$timeout(function() {
+			statesService.setData();
+		}, 4000);
+		
+		$timeout(function() {
+			if(statesService.getData() > ''){	
+				$scope.closeLogin();
+				$scope.show1(1000);
+				$state.go('app.vouchers');
+				statesService.setDadosLogin(data.username,data.password);
+			}else{
+				if(statesService.getStatus() == 0){
+					$scope.showAlertConnection();
+				}else{
+					$scope.showAlert();
+				}
+			}
+		}, 5000);
+	}
+  */
   
  //********************************************* DashCtrl  ***********************************************// 
    
@@ -245,55 +298,8 @@ angular.module('starter')
 	
 
 	// Objeto criado para recuperação do login
-/*	$scope.loginData = {};
+	/*$scope.loginData = {};*/
 		
-	
-	
-	
-	 $scope.login = function(data) {
-		AuthService.login(data.username, data.password).then(function(authenticated) {
-			$scope.closeLogin();
-			$scope.show1(1000);
-		  $state.go('app.vouchers', {}, {reload: true});
-		  $scope.setCurrentUsername(data.username);
-		}, function(err) {
-		  var alertPopup = $ionicPopup.alert({
-			title: 'Login failed!',
-			template: 'Please check your credentials!'
-		  });
-		});
-	  };*/
-
-/*	$scope.doLogin = function() {
-		//FAZ SOLICITAÇÃO PASSANDO DADOS VIA POST, QUE SEJA GERADO UM JSON  
-		$http({
-		url: 'http://app.rjag.com.br/app-IOS/login-3.php', 
-		method: "POST",
-		params: {email: $scope.loginData.username, senha:$scope.loginData.password}
-		});
-		
-		//CAPTURADO DADOS DO JSON
-		$scope.show1(5000);
-		$timeout(function() {
-			statesService.setData();
-		}, 4000);
-		
-		$timeout(function() {
-			if(statesService.getData() > ''){	
-				$scope.closeLogin();
-				$scope.show1(1000);
-				$state.go('app.vouchers');
-				statesService.setDadosLogin($scope.loginData.username,$scope.loginData.password);
-			}else{
-				if(statesService.getStatus() == 0){
-					$scope.showAlertConnection();
-				}else{
-					$scope.showAlert();
-				}
-			}
-		}, 5000);
-	};*/
- 
   
 //********************************************* CADASTRO  ***********************************************// 
  	

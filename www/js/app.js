@@ -4,7 +4,7 @@
 *include module : starter.controllers
 * include module : starter.welcomeController
 */
-angular.module('starter', ['ionic','ngMockE2E','ionic.service.core', 'ionic.service.deploy', 'starter.controllers'])
+angular.module('starter', ['ionic','ionic.service.core', 'ionic.service.deploy', 'starter.controllers'])
 
 /*.config(['$ionicAppProvider', function($ionicAppProvider) {
   // Identify app
@@ -16,10 +16,6 @@ angular.module('starter', ['ionic','ngMockE2E','ionic.service.core', 'ionic.serv
   });
 }])*/
 	
-.run(function($httpBackend){
-  $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
-})
-
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -33,18 +29,6 @@ angular.module('starter', ['ionic','ngMockE2E','ionic.service.core', 'ionic.serv
   });
 })
 
-
-.run(function($httpBackend){
-  $httpBackend.whenGET('http://localhost:8100/valid')
-        .respond({message: 'This is my valid response!'});
-  $httpBackend.whenGET('http://localhost:8100/notauthenticated')
-        .respond(401, {message: "Not Authenticated"});
-  $httpBackend.whenGET('http://localhost:8100/notauthorized')
-        .respond(403, {message: "Not Authorized"});
- 
-  $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
- })
- 
 
 .config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
   $stateProvider
@@ -66,6 +50,10 @@ angular.module('starter', ['ionic','ngMockE2E','ionic.service.core', 'ionic.serv
           controller: 'voucherCtrl'
         }
     }
+/*	,
+    data: {
+      authorizedRoles: [USER_ROLES.admin] // bloquear permissao para usuarios comuns
+    }*/
   })
   .state('app.vouchers', {
     url: '/vouchers',
