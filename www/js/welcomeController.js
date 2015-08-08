@@ -266,7 +266,7 @@ angular.module('starter')
   	};
  
 	
-  $scope.performValidRequest = function() {
+/*  $scope.performValidRequest = function() {
     $http.get('http://localhost:8100/valid').then(
       function(result) {
         $scope.response = result;
@@ -290,7 +290,7 @@ angular.module('starter')
         $scope.response = err;
       });
   };
-  
+  */
 //********************************************* LOGIN  ***********************************************// 
 
 /*	$scope.logout = function() {
