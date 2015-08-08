@@ -57,6 +57,15 @@ angular.module('starter', ['ionic','ionic.service.core', 'ionic.service.deploy',
       authorizedRoles: [USER_ROLES.admin] // bloquear permissao para usuarios comuns
     }*/
   })
+    .state('app.unidades', {
+    url: '/unidades',
+    views: {
+  		'menuContent': {
+    	templateUrl: "templates/unidades.html",
+    	controller: 'unidadesLets'
+  		}
+  	}
+  })
   .state('app.vouchers', {
     url: '/vouchers',
     views: {
