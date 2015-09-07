@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Double Lets Eat</name>
+    <name>Push</name>
     <description>
-        Double
+        Hello World sample application that responds to the deviceready event.
     </description>
-     <author email="vagner@gmail.com" href="">
-        Double
+     <author email="comercial@dsdigital.com.br" href="http://dsdigital.com.br">
+        DS Digital Sistemas
     </author>
     <content src="index.html" />
     
